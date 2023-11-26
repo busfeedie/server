@@ -1,8 +1,9 @@
+# frozen_string_literal: true
 # typed: strict
 
 module Api
-  # This controller is used to manage the live location of vehicles
-  class LocationsController < ApplicationController
+  # This controller is used to manage the live position of vehicles
+  class PositionsController < ApplicationController
     extend ::T::Sig
     protect_from_forgery with: :null_session
 
