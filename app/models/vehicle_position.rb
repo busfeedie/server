@@ -10,6 +10,8 @@ class VehiclePosition < ActiveRecord::Base
   @speed = T.let(nil, T.nilable(Float))
   @measured_at = T.let(nil, T.nilable(DateTime))
   @occupancy_percentage = T.let(nil, T.nilable(Integer))
+  @created_at = T.let(nil, T.nilable(DateTime))
+  @updated_at = T.let(nil, T.nilable(DateTime))
 
   attribute :lonlat, :st_point, srid: 4326, geographic: true
   enum :vehicle_stop_status, %i[incoming_at stopped_at in_transit_to]
