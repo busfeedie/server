@@ -62,7 +62,7 @@ group :development do
   gem 'brakeman', require: false
   gem 'bundler-audit', require: false
 
-  gem 'error_highlight', '>= 0.4.0', platforms: [:ruby]
+  gem 'error_highlight', '>= 0.3.0', platforms: [:ruby]
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
