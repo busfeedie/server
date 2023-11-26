@@ -86,7 +86,11 @@ GEM
     bindex (0.8.1)
     bootsnap (1.17.0)
       msgpack (~> 1.2)
+    brakeman (6.0.1)
     builder (3.2.4)
+    bundler-audit (0.9.1)
+      bundler (>= 1.2.0, < 3)
+      thor (~> 1.0)
     capybara (3.39.2)
       addressable
       matrix
@@ -321,6 +325,8 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgis-adapter
   bootsnap
+  brakeman
+  bundler-audit
   capybara
   debug
   error_highlight (>= 0.4.0)
