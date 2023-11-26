@@ -58,6 +58,10 @@ group :development, :test do
 end
 
 group :development do
+  # Brakeman and Bundler-Audit provide security audits of gems and rails
+  gem 'brakeman', require: false
+  gem 'bundler-audit', require: false
+
   gem 'error_highlight', '>= 0.4.0', platforms: [:ruby]
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
