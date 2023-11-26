@@ -59,8 +59,8 @@ end
 
 group :development do
   # Brakeman and Bundler-Audit provide security audits of gems and rails
-  gem 'brakeman', require: false
-  gem 'bundler-audit', require: false
+  gem 'brakeman'
+  gem 'bundler-audit'
 
   gem 'error_highlight', '>= 0.3.0', platforms: [:ruby]
 
