@@ -329,7 +329,7 @@ DEPENDENCIES
   bundler-audit
   capybara
   debug
-  error_highlight (>= 0.4.0)
+  error_highlight (>= 0.3.0)
   gtfs-realtime-bindings
   importmap-rails
   jbuilder
