@@ -251,10 +251,10 @@ class Route
     def cable_tram?; end
 
     sig { void }
-    def continuous_drop_off_must_coordiante!; end
+    def continuous_drop_off_must_coordinate!; end
 
     sig { returns(T::Boolean) }
-    def continuous_drop_off_must_coordiante?; end
+    def continuous_drop_off_must_coordinate?; end
 
     sig { void }
     def continuous_drop_off_must_phone!; end
@@ -275,10 +275,10 @@ class Route
     def continuous_drop_off_not_available?; end
 
     sig { void }
-    def continuous_pickup_must_coordiante!; end
+    def continuous_pickup_must_coordinate!; end
 
     sig { returns(T::Boolean) }
-    def continuous_pickup_must_coordiante?; end
+    def continuous_pickup_must_coordinate?; end
 
     sig { void }
     def continuous_pickup_must_phone!; end
@@ -377,7 +377,7 @@ class Route
     def cable_tram(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def continuous_drop_off_must_coordiante(*args, &blk); end
+    def continuous_drop_off_must_coordinate(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def continuous_drop_off_must_phone(*args, &blk); end
@@ -389,7 +389,7 @@ class Route
     def continuous_drop_off_not_available(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def continuous_pickup_must_coordiante(*args, &blk); end
+    def continuous_pickup_must_coordinate(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def continuous_pickup_must_phone(*args, &blk); end
@@ -516,7 +516,7 @@ class Route
     def not_cable_tram(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def not_continuous_drop_off_must_coordiante(*args, &blk); end
+    def not_continuous_drop_off_must_coordinate(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def not_continuous_drop_off_must_phone(*args, &blk); end
@@ -528,7 +528,7 @@ class Route
     def not_continuous_drop_off_not_available(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def not_continuous_pickup_must_coordiante(*args, &blk); end
+    def not_continuous_pickup_must_coordinate(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def not_continuous_pickup_must_phone(*args, &blk); end
@@ -1683,7 +1683,7 @@ class Route
     def cable_tram(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def continuous_drop_off_must_coordiante(*args, &blk); end
+    def continuous_drop_off_must_coordinate(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def continuous_drop_off_must_phone(*args, &blk); end
@@ -1695,7 +1695,7 @@ class Route
     def continuous_drop_off_not_available(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def continuous_pickup_must_coordiante(*args, &blk); end
+    def continuous_pickup_must_coordinate(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def continuous_pickup_must_phone(*args, &blk); end
@@ -1788,7 +1788,7 @@ class Route
     def not_cable_tram(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def not_continuous_drop_off_must_coordiante(*args, &blk); end
+    def not_continuous_drop_off_must_coordinate(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def not_continuous_drop_off_must_phone(*args, &blk); end
@@ -1800,7 +1800,7 @@ class Route
     def not_continuous_drop_off_not_available(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def not_continuous_pickup_must_coordiante(*args, &blk); end
+    def not_continuous_pickup_must_coordinate(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def not_continuous_pickup_must_phone(*args, &blk); end
