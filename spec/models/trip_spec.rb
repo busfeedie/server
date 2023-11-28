@@ -3,7 +3,7 @@
 
 RSpec.describe ::Trip, type: :model do
   context 'when creating a new trip' do
-    it 'should create a new position from a string' do
+    it 'should create a new trip with all attributes populated' do
       expect do
         ::Trip.create!(
           gtfs_trip_id: '123-a-5',
@@ -15,7 +15,8 @@ RSpec.describe ::Trip, type: :model do
           block_id: '123',
           gtfs_shape_id: '123',
           wheelchair_accessible: :wheelchair_accessible,
-          bikes_allowed: :bikes_allowed
+          bikes_allowed: :bikes_allowed,
+          route: create(:route)
         )
       end.to change { ::Trip.count }.by(1)
     end

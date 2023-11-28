@@ -9,11 +9,29 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
-
-ActiveRecord::Schema[7.1].define(version: 2023_11_28_082239) do
+# rubocop:disable all
+ActiveRecord::Schema[7.1].define(version: 2023_11_28_212238) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "routes", force: :cascade do |t|
+    t.string "gtfs_route_id", null: false
+    t.string "gtfs_agency_id", null: false
+    t.string "route_short_name"
+    t.string "route_long_name"
+    t.string "route_desc"
+    t.integer "route_type", null: false
+    t.string "route_url"
+    t.string "route_color"
+    t.string "route_text_color"
+    t.integer "route_sort_order"
+    t.integer "continuous_pickup", default: 1
+    t.integer "continuous_drop_off", default: 1
+    t.string "gtfs_network_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "trip_identifiers", force: :cascade do |t|
     t.date "start_date"
@@ -36,6 +54,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_28_082239) do
     t.integer "bikes_allowed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "route_id"
+    t.index ["route_id"], name: "index_trips_on_route_id"
   end
 
   create_table "vehicle_positions", force: :cascade do |t|

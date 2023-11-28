@@ -12,5 +12,6 @@ FactoryBot.define do
     gtfs_shape_id { '123' }
     wheelchair_accessible { :wheelchair_accessible }
     bikes_allowed { :bikes_allowed }
+    route { create(:route) }
   end
 end
