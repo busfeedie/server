@@ -19,5 +19,15 @@ RSpec.describe VehiclePosition, type: :model do
         expect(position.lonlat.lat).to eq(47.621)
       end.to change { ::VehiclePosition.count }.by(1)
     end
+
+    it 'can be linked with a trip' do
+      trip = create(:trip)
+      point = RGeo::Geographic.spherical_factory(srid: 4326).point(-122.345, 47.621)
+      position = nil
+      expect do
+        position = ::VehiclePosition.create!(trip:, lonlat: point)
+      end.to change { ::VehiclePosition.count }.by(1)
+      expect(position.trip).to eq(trip)
+    end
   end
 end

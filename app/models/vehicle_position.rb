@@ -14,6 +14,7 @@ class VehiclePosition < ActiveRecord::Base
   @updated_at = T.let(nil, T.nilable(DateTime))
 
   belongs_to :trip_identifier, optional: true
+  belongs_to :trip, optional: true
 
   attribute :lonlat, :st_point, srid: 4326, geographic: true
   enum :vehicle_stop_status, %i[incoming_at stopped_at in_transit_to]
