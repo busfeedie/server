@@ -324,8 +324,17 @@ class VehiclePosition
   end
 
   module GeneratedAssociationMethods
+    sig { params(args: T.untyped, blk: T.untyped).returns(::Trip) }
+    def build_trip(*args, &blk); end
+
     sig { params(args: T.untyped, blk: T.untyped).returns(::TripIdentifier) }
     def build_trip_identifier(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(::Trip) }
+    def create_trip(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(::Trip) }
+    def create_trip!(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(::TripIdentifier) }
     def create_trip_identifier(*args, &blk); end
@@ -333,8 +342,17 @@ class VehiclePosition
     sig { params(args: T.untyped, blk: T.untyped).returns(::TripIdentifier) }
     def create_trip_identifier!(*args, &blk); end
 
+    sig { returns(T.nilable(::Trip)) }
+    def reload_trip; end
+
     sig { returns(T.nilable(::TripIdentifier)) }
     def reload_trip_identifier; end
+
+    sig { returns(T.nilable(::Trip)) }
+    def trip; end
+
+    sig { params(value: T.nilable(::Trip)).void }
+    def trip=(value); end
 
     sig { returns(T.nilable(::TripIdentifier)) }
     def trip_identifier; end
@@ -1041,6 +1059,9 @@ class VehiclePosition
     def restore_speed!; end
 
     sig { void }
+    def restore_trip_id!; end
+
+    sig { void }
     def restore_trip_identifier_id!; end
 
     sig { void }
@@ -1110,6 +1131,12 @@ class VehiclePosition
     def saved_change_to_speed?; end
 
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def saved_change_to_trip_id; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_trip_id?; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def saved_change_to_trip_identifier_id; end
 
     sig { returns(T::Boolean) }
@@ -1171,6 +1198,51 @@ class VehiclePosition
 
     sig { void }
     def speed_will_change!; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def trip_id; end
+
+    sig { params(value: T.nilable(::Integer)).returns(T.nilable(::Integer)) }
+    def trip_id=(value); end
+
+    sig { returns(T::Boolean) }
+    def trip_id?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def trip_id_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def trip_id_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def trip_id_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def trip_id_change; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def trip_id_change_to_be_saved; end
+
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    def trip_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::Integer)) }
+    def trip_id_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def trip_id_previous_change; end
+
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    def trip_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::Integer)) }
+    def trip_id_previously_was; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def trip_id_was; end
+
+    sig { void }
+    def trip_id_will_change!; end
 
     sig { returns(T.nilable(::Integer)) }
     def trip_identifier_id; end
@@ -1350,6 +1422,9 @@ class VehiclePosition
 
     sig { returns(T::Boolean) }
     def will_save_change_to_speed?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_trip_id?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_trip_identifier_id?; end
