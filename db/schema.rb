@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_26_220618) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_28_082239) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -18,6 +18,22 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_220618) do
   create_table "trip_identifiers", force: :cascade do |t|
     t.date "start_date"
     t.time "start_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "gtfs_trip_id"
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.string "gtfs_trip_id", null: false
+    t.string "gtfs_route_id", null: false
+    t.string "gtfs_service_id", null: false
+    t.string "trip_headsign"
+    t.string "trip_short_name"
+    t.integer "direction"
+    t.string "block_id"
+    t.string "gtfs_shape_id"
+    t.integer "wheelchair_accessible"
+    t.integer "bikes_allowed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -34,6 +50,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_220618) do
     t.bigint "trip_identifier_id"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.bigint "trip_id"
+    t.index ["trip_id"], name: "index_vehicle_positions_on_trip_id"
     t.index ["trip_identifier_id"], name: "index_vehicle_positions_on_trip_identifier_id"
   end
 
