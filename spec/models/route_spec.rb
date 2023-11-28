@@ -2,7 +2,7 @@
 # typed: false
 
 # rubocop:disable Metrics/BlockLength
-RSpec.describe ::Trip, type: :model do
+RSpec.describe ::Route, type: :model do
   context 'when creating a new route' do
     it 'should create a new route with all attributes populated' do
       expect do
@@ -48,5 +48,20 @@ RSpec.describe ::Trip, type: :model do
         route_type: :bus
       )
     end.to change { ::Route.count }.by(1)
+  end
+
+  context '#any_continuous?' do
+    it 'returns true if continuous_pickup is available' do
+      route = create(:route, continuous_pickup: :continuous_pickup_normal)
+      expect(route.any_continuous?).to eq(true)
+    end
+    it 'returns true if continuous_dropoff is available' do
+      route = create(:route, continuous_drop_off: :continuous_drop_off_normal)
+      expect(route.any_continuous?).to eq(true)
+    end
+    it 'returns false if no continuous pickup or dropoff' do
+      route = create(:route)
+      expect(route.any_continuous?).to eq(false)
+    end
   end
 end

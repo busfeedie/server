@@ -7,9 +7,9 @@ class Route < ApplicationRecord
 
   enum route_type: %i[tram metro rail bus ferry cable_tram cable_car funicular trolleybus monorail]
   enum continuous_pickup: %i[continuous_pickup_normal continuous_pickup_not_available continuous_pickup_must_phone
-                             continuous_pickup_must_coordiante]
+                             continuous_pickup_must_coordinate]
   enum continuous_drop_off: %i[continuous_drop_off_normal continuous_drop_off_not_available
-                               continuous_drop_off_must_phone continuous_drop_off_must_coordiante]
+                               continuous_drop_off_must_phone continuous_drop_off_must_coordinate]
 
   validates :gtfs_route_id, :route_type, :gtfs_agency_id, presence: true
   validates :route_short_name, presence: true, if: proc { |route| route.route_long_name.blank? }
@@ -22,4 +22,19 @@ class Route < ApplicationRecord
   validates :route_sort_order, numericality: { only_integer: true }, allow_nil: true
 
   has_many :trips, inverse_of: :route
+
+  sig { returns(T::Boolean) }
+  def any_continuous?
+    continuous_drop_off_available? || continuous_pickup_available?
+  end
+
+  sig { returns(T::Boolean) }
+  def continuous_pickup_available?
+    !continuous_pickup_not_available?
+  end
+
+  sig { returns(T::Boolean) }
+  def continuous_drop_off_available?
+    !continuous_drop_off_not_available?
+  end
 end

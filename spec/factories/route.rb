@@ -12,7 +12,5 @@ FactoryBot.define do
     route_color { 'ffffff' }
     route_text_color { '000000' }
     route_sort_order { 1 }
-    continuous_pickup { :continuous_pickup_normal }
-    continuous_drop_off { :continuous_drop_off_normal }
   end
 end
