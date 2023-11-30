@@ -12,5 +12,7 @@ class Stop < ApplicationRecord
   belongs_to :parent_station, class_name: 'Stop', optional: true
 
   validates :gtfs_stop_id, presence: true
-  validates :stop_name, :lonlat, presence: true, if: proc { |stop| stop.location_type <= 2 }
+  validates :stop_name, :lonlat, presence: true, if: proc { |stop|
+                                                       %i[generic_node boarding_area].include? stop.location_type
+                                                     }
 end
