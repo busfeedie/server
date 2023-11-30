@@ -6,10 +6,8 @@ class Route < ApplicationRecord
   extend T::Sig
 
   enum route_type: %i[tram metro rail bus ferry cable_tram cable_car funicular trolleybus monorail]
-  enum continuous_pickup: %i[continuous_pickup_normal continuous_pickup_not_available continuous_pickup_must_phone
-                             continuous_pickup_must_coordinate]
-  enum continuous_drop_off: %i[continuous_drop_off_normal continuous_drop_off_not_available
-                               continuous_drop_off_must_phone continuous_drop_off_must_coordinate]
+  enum continuous_pickup: %i[continuous none phone coordinate], _prefix: :continuous_pickup
+  enum continuous_drop_off: %i[continuous none phone coordinate], _prefix: :continuous_drop_off
 
   has_many :trips, inverse_of: :route
   belongs_to :agency
@@ -33,12 +31,12 @@ class Route < ApplicationRecord
 
   sig { returns(T::Boolean) }
   def continuous_pickup_available?
-    !continuous_pickup_not_available?
+    !continuous_pickup_none?
   end
 
   sig { returns(T::Boolean) }
   def continuous_drop_off_available?
-    !continuous_drop_off_not_available?
+    !continuous_drop_off_none?
   end
 
   sig { void }

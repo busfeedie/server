@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 # typed: false
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe ::Route, type: :model do
   context 'when creating a new route' do
     it 'should create a new route with all attributes populated' do
@@ -17,8 +16,8 @@ RSpec.describe ::Route, type: :model do
           route_color: 'ffffff',
           route_text_color: '000000',
           route_sort_order: 1,
-          continuous_pickup: :continuous_pickup_normal,
-          continuous_drop_off: :continuous_drop_off_normal
+          continuous_pickup: :continuous,
+          continuous_drop_off: :continuous
         )
       end.to change { ::Route.count }.by(1)
     end
@@ -52,11 +51,11 @@ RSpec.describe ::Route, type: :model do
 
   context '#any_continuous?' do
     it 'returns true if continuous_pickup is available' do
-      route = create(:route, continuous_pickup: :continuous_pickup_normal)
+      route = create(:route, continuous_pickup: :continuous)
       expect(route.any_continuous?).to eq(true)
     end
     it 'returns true if continuous_dropoff is available' do
-      route = create(:route, continuous_drop_off: :continuous_drop_off_normal)
+      route = create(:route, continuous_drop_off: :continuous)
       expect(route.any_continuous?).to eq(true)
     end
     it 'returns false if no continuous pickup or dropoff' do
