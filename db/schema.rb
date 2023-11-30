@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_30_190207) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_30_203822) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -24,6 +24,21 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_190207) do
     t.string "agency_phone"
     t.string "agency_fare_url"
     t.string "agency_email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "calendars", force: :cascade do |t|
+    t.string "gtfs_service_id", null: false
+    t.boolean "monday", null: false
+    t.boolean "tuesday", null: false
+    t.boolean "wednesday", null: false
+    t.boolean "thursday", null: false
+    t.boolean "friday", null: false
+    t.boolean "saturday", null: false
+    t.boolean "sunday", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -70,6 +85,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_190207) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "route_id"
+    t.bigint "calendar_id"
+    t.index ["calendar_id"], name: "index_trips_on_calendar_id"
     t.index ["route_id"], name: "index_trips_on_route_id"
   end
 

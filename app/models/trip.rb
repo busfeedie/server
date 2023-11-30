@@ -10,6 +10,7 @@ class Trip < ApplicationRecord
   enum bikes_allowed: %i[bikes_unknown bikes_allowed bikes_not_allowed]
 
   belongs_to :route
+  belongs_to :calendar
 
   before_validation :refresh_gtfs_route_id
 
