@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_30_203822) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_30_212036) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -63,6 +63,26 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_203822) do
     t.index ["agency_id"], name: "index_routes_on_agency_id"
   end
 
+  create_table "stops", force: :cascade do |t|
+    t.string "gtfs_stop_id", null: false
+    t.string "stop_code"
+    t.string "stop_name"
+    t.string "tts_stop_name"
+    t.string "stop_desc"
+    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.string "zone_id"
+    t.string "stop_url"
+    t.integer "location_type"
+    t.bigint "parent_station_id"
+    t.string "stop_timezone"
+    t.integer "wheelchair_boarding"
+    t.string "gtfs_level_id"
+    t.string "platform_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_station_id"], name: "index_stops_on_parent_station_id"
+  end
+
   create_table "trip_identifiers", force: :cascade do |t|
     t.date "start_date"
     t.time "start_time"
@@ -107,4 +127,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_203822) do
     t.index ["trip_identifier_id"], name: "index_vehicle_positions_on_trip_identifier_id"
   end
 
+  add_foreign_key "stops", "stops", column: "parent_station_id"
 end
