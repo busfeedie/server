@@ -22,6 +22,7 @@ class Route < ApplicationRecord
   validates :route_sort_order, numericality: { only_integer: true }, allow_nil: true
 
   has_many :trips, inverse_of: :route
+  belongs_to :agency, inverse_of: :routes
 
   sig { returns(T::Boolean) }
   def any_continuous?
@@ -36,5 +37,10 @@ class Route < ApplicationRecord
   sig { returns(T::Boolean) }
   def continuous_drop_off_available?
     !continuous_drop_off_not_available?
+  end
+
+  sig { void }
+  def refresh_gtfs_route_id
+    self.gtfs_agency_id = T.must(agency).gtfs_agency_id
   end
 end

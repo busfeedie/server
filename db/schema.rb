@@ -9,11 +9,24 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
-# rubocop:disable all
-ActiveRecord::Schema[7.1].define(version: 2023_11_28_212238) do
+
+ActiveRecord::Schema[7.1].define(version: 2023_11_30_190207) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "agencies", force: :cascade do |t|
+    t.string "gtfs_agency_id", null: false
+    t.string "agency_name", null: false
+    t.string "agency_url", null: false
+    t.string "agency_timezone", null: false
+    t.string "agency_lang"
+    t.string "agency_phone"
+    t.string "agency_fare_url"
+    t.string "agency_email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "routes", force: :cascade do |t|
     t.string "gtfs_route_id", null: false
@@ -31,6 +44,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_28_212238) do
     t.string "gtfs_network_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "agency_id"
+    t.index ["agency_id"], name: "index_routes_on_agency_id"
   end
 
   create_table "trip_identifiers", force: :cascade do |t|
