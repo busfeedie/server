@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :route, class: '::Route' do
     gtfs_route_id { '123-a-5' }
-    gtfs_agency_id { '123' }
+    agency { create(:agency) }
     route_short_name { '123' }
     route_long_name { 'to City Centre' }
     route_desc { 'to City Centre' }

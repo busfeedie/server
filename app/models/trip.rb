@@ -12,9 +12,9 @@ class Trip < ApplicationRecord
   belongs_to :route
   belongs_to :calendar
 
-  before_validation :refresh_gtfs_route_id
+  before_validation :refresh_gtfs_route_id, :refresh_gtfs_service_id
 
-  validates :route, :gtfs_route_id, :gtfs_trip_id, :service, :gtfs_service_id, presence: true
+  validates :route, :gtfs_route_id, :gtfs_trip_id, :calendar, :gtfs_service_id, presence: true
   validates :gtfs_shape_id, presence: true, if: proc { |trip| !trip.route.any_continuous? }
 
   sig { void }

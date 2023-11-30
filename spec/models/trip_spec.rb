@@ -7,8 +7,6 @@ RSpec.describe ::Trip, type: :model do
       expect do
         ::Trip.create!(
           gtfs_trip_id: '123-a-5',
-          gtfs_route_id: '123',
-          gtfs_service_id: 'a',
           trip_headsign: 'to City Centre',
           trip_short_name: 'to City Centre',
           direction: :inbound,
@@ -16,7 +14,8 @@ RSpec.describe ::Trip, type: :model do
           gtfs_shape_id: '123',
           wheelchair_accessible: :wheelchair_accessible,
           bikes_allowed: :bikes_allowed,
-          route: create(:route)
+          route: create(:route),
+          calendar: create(:calendar)
         )
       end.to change { ::Trip.count }.by(1)
     end

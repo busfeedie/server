@@ -13,11 +13,9 @@ RSpec.describe ::Agency, type: :model do
           agency_lang: 'en',
           agency_phone: '555-555-5555',
           agency_fare_url: 'https://example.com',
-          agency_email: '123@example.com',
-          agency_branding_url: 'https://example.com',
-          agency_branding_name: 'Agency Branding Name'
+          agency_email: '123@example.com'
         )
-      end.to change { ::Route.count }.by(1)
+      end.to change { ::Agency.count }.by(1)
     end
   end
 end

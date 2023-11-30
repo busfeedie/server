@@ -8,7 +8,7 @@ RSpec.describe ::Route, type: :model do
       expect do
         ::Route.create!(
           gtfs_route_id: '123-a-5',
-          gtfs_agency_id: '123',
+          agency: create(:agency),
           route_short_name: '123',
           route_long_name: 'to City Centre',
           route_desc: 'to City Centre',
@@ -28,14 +28,14 @@ RSpec.describe ::Route, type: :model do
     expect do
       ::Route.create!(
         gtfs_route_id: '123-a-5',
-        gtfs_agency_id: '123',
+        agency: create(:agency),
         route_type: :bus
       )
     end.to raise_error(ActiveRecord::RecordInvalid)
     expect do
       ::Route.create!(
         gtfs_route_id: '123-a-5',
-        gtfs_agency_id: '123',
+        agency: create(:agency),
         route_long_name: 'to City Centre',
         route_type: :bus
       )
@@ -43,7 +43,7 @@ RSpec.describe ::Route, type: :model do
     expect do
       ::Route.create!(
         gtfs_route_id: '123-a-5',
-        gtfs_agency_id: '123',
+        agency: create(:agency),
         route_short_name: 'to City Centre',
         route_type: :bus
       )
