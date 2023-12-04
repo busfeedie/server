@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_04_204604) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_04_205931) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -70,6 +70,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_204604) do
     t.datetime "updated_at", null: false
     t.bigint "agency_id"
     t.index ["agency_id"], name: "index_routes_on_agency_id"
+  end
+
+  create_table "shapes", force: :cascade do |t|
+    t.string "gtfs_shape_id", null: false
+    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}, null: false
+    t.integer "shape_pt_sequence", null: false
+    t.float "shape_dist_traveled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "stop_times", force: :cascade do |t|
@@ -134,8 +143,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_204604) do
     t.datetime "updated_at", null: false
     t.bigint "route_id"
     t.bigint "calendar_id"
+    t.bigint "shape_id"
     t.index ["calendar_id"], name: "index_trips_on_calendar_id"
     t.index ["route_id"], name: "index_trips_on_route_id"
+    t.index ["shape_id"], name: "index_trips_on_shape_id"
   end
 
   create_table "vehicle_positions", force: :cascade do |t|
@@ -159,4 +170,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_204604) do
   add_foreign_key "stop_times", "stops"
   add_foreign_key "stop_times", "trips"
   add_foreign_key "stops", "stops", column: "parent_station_id"
+  add_foreign_key "trips", "shapes"
 end

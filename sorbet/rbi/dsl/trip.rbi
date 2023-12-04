@@ -288,6 +288,9 @@ class Trip
     sig { params(args: T.untyped, blk: T.untyped).returns(::Route) }
     def build_route(*args, &blk); end
 
+    sig { params(args: T.untyped, blk: T.untyped).returns(::Shape) }
+    def build_shape(*args, &blk); end
+
     sig { returns(T.nilable(::Calendar)) }
     def calendar; end
 
@@ -306,17 +309,32 @@ class Trip
     sig { params(args: T.untyped, blk: T.untyped).returns(::Route) }
     def create_route!(*args, &blk); end
 
+    sig { params(args: T.untyped, blk: T.untyped).returns(::Shape) }
+    def create_shape(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(::Shape) }
+    def create_shape!(*args, &blk); end
+
     sig { returns(T.nilable(::Calendar)) }
     def reload_calendar; end
 
     sig { returns(T.nilable(::Route)) }
     def reload_route; end
 
+    sig { returns(T.nilable(::Shape)) }
+    def reload_shape; end
+
     sig { returns(T.nilable(::Route)) }
     def route; end
 
     sig { params(value: T.nilable(::Route)).void }
     def route=(value); end
+
+    sig { returns(T.nilable(::Shape)) }
+    def shape; end
+
+    sig { params(value: T.nilable(::Shape)).void }
+    def shape=(value); end
   end
 
   module GeneratedAssociationRelationMethods
@@ -1117,6 +1135,9 @@ class Trip
     def restore_route_id!; end
 
     sig { void }
+    def restore_shape_id!; end
+
+    sig { void }
     def restore_trip_headsign!; end
 
     sig { void }
@@ -1245,6 +1266,12 @@ class Trip
     sig { returns(T::Boolean) }
     def saved_change_to_route_id?; end
 
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def saved_change_to_shape_id; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_shape_id?; end
+
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def saved_change_to_trip_headsign; end
 
@@ -1268,6 +1295,51 @@ class Trip
 
     sig { returns(T::Boolean) }
     def saved_change_to_wheelchair_accessible?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def shape_id; end
+
+    sig { params(value: T.nilable(::Integer)).returns(T.nilable(::Integer)) }
+    def shape_id=(value); end
+
+    sig { returns(T::Boolean) }
+    def shape_id?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def shape_id_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def shape_id_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def shape_id_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def shape_id_change; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def shape_id_change_to_be_saved; end
+
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    def shape_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::Integer)) }
+    def shape_id_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def shape_id_previous_change; end
+
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    def shape_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::Integer)) }
+    def shape_id_previously_was; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def shape_id_was; end
+
+    sig { void }
+    def shape_id_will_change!; end
 
     sig { returns(T.nilable(::String)) }
     def trip_headsign; end
@@ -1498,6 +1570,9 @@ class Trip
 
     sig { returns(T::Boolean) }
     def will_save_change_to_route_id?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_shape_id?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_trip_headsign?; end
