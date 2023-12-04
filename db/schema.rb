@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_30_220755) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_04_204604) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -26,6 +26,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_220755) do
     t.string "agency_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "calendar_dates", force: :cascade do |t|
+    t.bigint "calendar_id", null: false
+    t.date "date", null: false
+    t.integer "exception_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calendar_id"], name: "index_calendar_dates_on_calendar_id"
   end
 
   create_table "calendars", force: :cascade do |t|
@@ -146,6 +155,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_220755) do
     t.index ["trip_identifier_id"], name: "index_vehicle_positions_on_trip_identifier_id"
   end
 
+  add_foreign_key "calendar_dates", "calendars"
   add_foreign_key "stop_times", "stops"
   add_foreign_key "stop_times", "trips"
   add_foreign_key "stops", "stops", column: "parent_station_id"
