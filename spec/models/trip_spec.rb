@@ -6,7 +6,6 @@ RSpec.describe ::Trip, type: :model do
     it 'should create a new trip without shapes if not continuous pickup / dropoff' do
       expect do
         ::Trip.create!(
-          gtfs_trip_id: '123-a-5',
           trip_headsign: 'to City Centre',
           trip_short_name: 'to City Centre',
           direction: :inbound,
@@ -21,7 +20,6 @@ RSpec.describe ::Trip, type: :model do
     it 'should create a new trip with a shape if continuous pickup' do
       expect do
         ::Trip.create!(
-          gtfs_trip_id: '123-a-5',
           trip_headsign: 'to City Centre',
           trip_short_name: 'to City Centre',
           direction: :inbound,
@@ -36,7 +34,6 @@ RSpec.describe ::Trip, type: :model do
     it 'should create a new trip with a shape if continuous pickup' do
       expect do
         ::Trip.create!(
-          gtfs_trip_id: '123-a-5',
           trip_headsign: 'to City Centre',
           trip_short_name: 'to City Centre',
           direction: :inbound,

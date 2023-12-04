@@ -13,18 +13,6 @@ class Trip < ApplicationRecord
   belongs_to :calendar
   belongs_to :shape, optional: true
 
-  before_validation :refresh_gtfs_route_id, :refresh_gtfs_service_id
-
-  validates :route, :gtfs_route_id, :gtfs_trip_id, :calendar, :gtfs_service_id, presence: true
+  validates :route, :calendar, presence: true
   validates :shape, presence: true, if: proc { |trip| trip.route.any_continuous? }
-
-  sig { void }
-  def refresh_gtfs_route_id
-    self.gtfs_route_id = T.must(route).gtfs_route_id
-  end
-
-  sig { void }
-  def refresh_gtfs_service_id
-    self.gtfs_service_id = T.must(calendar).gtfs_service_id
-  end
 end
