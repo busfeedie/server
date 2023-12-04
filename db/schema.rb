@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_04_205931) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_04_215339) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -129,14 +129,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_205931) do
   end
 
   create_table "trips", force: :cascade do |t|
-    t.string "gtfs_trip_id", null: false
-    t.string "gtfs_route_id", null: false
-    t.string "gtfs_service_id", null: false
     t.string "trip_headsign"
     t.string "trip_short_name"
     t.integer "direction"
     t.string "block_id"
-    t.string "gtfs_shape_id"
     t.integer "wheelchair_accessible"
     t.integer "bikes_allowed"
     t.datetime "created_at", null: false
