@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_05_075953) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_05_195741) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -163,6 +163,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_075953) do
     t.bigint "calendar_id"
     t.bigint "shape_id"
     t.bigint "app_id", null: false
+    t.string "gtfs_trip_id", null: false
     t.index ["app_id"], name: "index_trips_on_app_id"
     t.index ["calendar_id"], name: "index_trips_on_calendar_id"
     t.index ["route_id"], name: "index_trips_on_route_id"

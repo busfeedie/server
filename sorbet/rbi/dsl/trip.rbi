@@ -891,6 +891,51 @@ class Trip
     sig { void }
     def direction_will_change!; end
 
+    sig { returns(::String) }
+    def gtfs_trip_id; end
+
+    sig { params(value: ::String).returns(::String) }
+    def gtfs_trip_id=(value); end
+
+    sig { returns(T::Boolean) }
+    def gtfs_trip_id?; end
+
+    sig { returns(T.nilable(::String)) }
+    def gtfs_trip_id_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def gtfs_trip_id_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def gtfs_trip_id_came_from_user?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def gtfs_trip_id_change; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def gtfs_trip_id_change_to_be_saved; end
+
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def gtfs_trip_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def gtfs_trip_id_in_database; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def gtfs_trip_id_previous_change; end
+
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def gtfs_trip_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def gtfs_trip_id_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def gtfs_trip_id_was; end
+
+    sig { void }
+    def gtfs_trip_id_will_change!; end
+
     sig { returns(T.nilable(::Integer)) }
     def id; end
 
@@ -1000,6 +1045,9 @@ class Trip
     def restore_direction!; end
 
     sig { void }
+    def restore_gtfs_trip_id!; end
+
+    sig { void }
     def restore_id!; end
 
     sig { void }
@@ -1103,6 +1151,12 @@ class Trip
 
     sig { returns(T::Boolean) }
     def saved_change_to_direction?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def saved_change_to_gtfs_trip_id; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_gtfs_trip_id?; end
 
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def saved_change_to_id; end
@@ -1408,6 +1462,9 @@ class Trip
 
     sig { returns(T::Boolean) }
     def will_save_change_to_direction?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_gtfs_trip_id?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_id?; end
