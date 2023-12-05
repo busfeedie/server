@@ -2,7 +2,7 @@
 # typed: false
 
 # https://gtfs.org/realtime/reference/#message-vehicleposition
-class TripIdentifier < ActiveRecord::Base
+class TripIdentifier < ApplicationRecord
   extend T::Sig
 
   has_many :vehicle_positions, inverse_of: :trip_identifier

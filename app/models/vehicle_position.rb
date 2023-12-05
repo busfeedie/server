@@ -2,7 +2,7 @@
 # typed: strict
 
 # https://gtfs.org/realtime/reference/#message-vehicleposition
-class VehiclePosition < ActiveRecord::Base
+class VehiclePosition < ApplicationRecord
   extend T::Sig
   include Pointable
 
@@ -19,4 +19,6 @@ class VehiclePosition < ActiveRecord::Base
 
   enum :vehicle_stop_status, %i[incoming_at stopped_at in_transit_to]
   enum :congestion_level, %i[unknown running_smoothly stop_and_go congestion sever_congestion]
+
+  validates :lonlat, presence: true
 end

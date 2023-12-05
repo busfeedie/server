@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_04_215339) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_05_075953) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -26,6 +26,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_215339) do
     t.string "agency_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "app_id", null: false
+    t.index ["app_id"], name: "index_agencies_on_app_id"
+  end
+
+  create_table "apps", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "calendar_dates", force: :cascade do |t|
@@ -34,6 +42,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_215339) do
     t.integer "exception_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "app_id", null: false
+    t.index ["app_id"], name: "index_calendar_dates_on_app_id"
     t.index ["calendar_id"], name: "index_calendar_dates_on_calendar_id"
   end
 
@@ -50,6 +60,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_215339) do
     t.date "end_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "app_id", null: false
+    t.index ["app_id"], name: "index_calendars_on_app_id"
   end
 
   create_table "routes", force: :cascade do |t|
@@ -69,7 +81,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_215339) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "agency_id"
+    t.bigint "app_id", null: false
     t.index ["agency_id"], name: "index_routes_on_agency_id"
+    t.index ["app_id"], name: "index_routes_on_app_id"
   end
 
   create_table "shapes", force: :cascade do |t|
@@ -79,6 +93,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_215339) do
     t.float "shape_dist_traveled"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "app_id", null: false
+    t.index ["app_id"], name: "index_shapes_on_app_id"
   end
 
   create_table "stop_times", force: :cascade do |t|
@@ -96,6 +112,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_215339) do
     t.boolean "timepoint", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "app_id", null: false
+    t.index ["app_id"], name: "index_stop_times_on_app_id"
     t.index ["stop_id"], name: "index_stop_times_on_stop_id"
     t.index ["trip_id"], name: "index_stop_times_on_trip_id"
   end
@@ -107,7 +125,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_215339) do
     t.string "tts_stop_name"
     t.string "stop_desc"
     t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
-    t.string "zone_id"
+    t.string "gtfs_zone_id"
     t.string "stop_url"
     t.integer "location_type", default: 0
     t.bigint "parent_station_id"
@@ -117,6 +135,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_215339) do
     t.string "platform_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "app_id", null: false
+    t.index ["app_id"], name: "index_stops_on_app_id"
     t.index ["parent_station_id"], name: "index_stops_on_parent_station_id"
   end
 
@@ -126,6 +146,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_215339) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "gtfs_trip_id"
+    t.bigint "app_id", null: false
+    t.index ["app_id"], name: "index_trip_identifiers_on_app_id"
   end
 
   create_table "trips", force: :cascade do |t|
@@ -140,6 +162,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_215339) do
     t.bigint "route_id"
     t.bigint "calendar_id"
     t.bigint "shape_id"
+    t.bigint "app_id", null: false
+    t.index ["app_id"], name: "index_trips_on_app_id"
     t.index ["calendar_id"], name: "index_trips_on_calendar_id"
     t.index ["route_id"], name: "index_trips_on_route_id"
     t.index ["shape_id"], name: "index_trips_on_shape_id"
@@ -158,6 +182,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_215339) do
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.bigint "trip_id"
+    t.bigint "app_id", null: false
+    t.index ["app_id"], name: "index_vehicle_positions_on_app_id"
     t.index ["trip_id"], name: "index_vehicle_positions_on_trip_id"
     t.index ["trip_identifier_id"], name: "index_vehicle_positions_on_trip_identifier_id"
   end
