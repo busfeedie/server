@@ -10,6 +10,7 @@ module Pointable
 
   def set_lon_lat(lon:, lat:)
     self.lonlat = RGeo::Geographic.spherical_factory(srid: 4326).point(lon, lat)
+    self
   end
 
   def lon

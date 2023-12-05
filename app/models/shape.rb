@@ -4,8 +4,7 @@
 # https://gtfs.org/schedule/reference/#shapestxt
 class Shape < ApplicationRecord
   extend T::Sig
-
-  attribute :lonlat, :st_point, srid: 4326, geographic: true
+  include Pointable
 
   has_many :trips
 
