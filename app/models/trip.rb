@@ -10,7 +10,7 @@ class Trip < ApplicationRecord
   enum bikes_allowed: %i[bikes_unknown bikes_allowed bikes_not_allowed]
 
   belongs_to :route
-  belongs_to :calendar
+  belongs_to :service, polymorphic: true
   belongs_to :shape, optional: true
 
   validates :route, :calendar, :gtfs_trip_id, presence: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_05_195741) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_05_205334) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -37,12 +37,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_195741) do
   end
 
   create_table "calendar_dates", force: :cascade do |t|
-    t.bigint "calendar_id", null: false
+    t.bigint "calendar_id"
     t.date "date", null: false
     t.integer "exception_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "app_id", null: false
+    t.string "gtfs_service_id", null: false
     t.index ["app_id"], name: "index_calendar_dates_on_app_id"
     t.index ["calendar_id"], name: "index_calendar_dates_on_calendar_id"
   end
@@ -160,12 +161,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_195741) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "route_id"
-    t.bigint "calendar_id"
     t.bigint "shape_id"
     t.bigint "app_id", null: false
     t.string "gtfs_trip_id", null: false
+    t.string "service_id", null: false
+    t.string "service_type", null: false
     t.index ["app_id"], name: "index_trips_on_app_id"
-    t.index ["calendar_id"], name: "index_trips_on_calendar_id"
     t.index ["route_id"], name: "index_trips_on_route_id"
     t.index ["shape_id"], name: "index_trips_on_shape_id"
   end

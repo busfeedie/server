@@ -7,7 +7,8 @@ class CalendarDate < ApplicationRecord
 
   enum exception_type: %i[added removed]
 
-  belongs_to :calendar
+  belongs_to :calendar, optional: true
+  has_many :trips, as: :service
 
   validates :date, :calendar, :exception_type, presence: true
 end
