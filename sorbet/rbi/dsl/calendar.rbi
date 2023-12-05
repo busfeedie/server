@@ -220,6 +220,24 @@ class Calendar
   end
 
   module GeneratedAssociationMethods
+    sig { returns(T.nilable(::App)) }
+    def app; end
+
+    sig { params(value: T.nilable(::App)).void }
+    def app=(value); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(::App) }
+    def build_app(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(::App) }
+    def create_app(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(::App) }
+    def create_app!(*args, &blk); end
+
+    sig { returns(T.nilable(::App)) }
+    def reload_app; end
+
     sig { returns(T::Array[T.untyped]) }
     def trip_ids; end
 
@@ -425,6 +443,51 @@ class Calendar
   end
 
   module GeneratedAttributeMethods
+    sig { returns(::Integer) }
+    def app_id; end
+
+    sig { params(value: ::Integer).returns(::Integer) }
+    def app_id=(value); end
+
+    sig { returns(T::Boolean) }
+    def app_id?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def app_id_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def app_id_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def app_id_came_from_user?; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def app_id_change; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def app_id_change_to_be_saved; end
+
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def app_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::Integer)) }
+    def app_id_in_database; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def app_id_previous_change; end
+
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def app_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::Integer)) }
+    def app_id_previously_was; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def app_id_was; end
+
+    sig { void }
+    def app_id_will_change!; end
+
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at; end
 
@@ -741,6 +804,9 @@ class Calendar
     def monday_will_change!; end
 
     sig { void }
+    def restore_app_id!; end
+
+    sig { void }
     def restore_created_at!; end
 
     sig { void }
@@ -826,6 +892,12 @@ class Calendar
 
     sig { void }
     def saturday_will_change!; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def saved_change_to_app_id; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_app_id?; end
 
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def saved_change_to_created_at; end
@@ -1180,6 +1252,9 @@ class Calendar
 
     sig { void }
     def wednesday_will_change!; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_app_id?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_created_at?; end
