@@ -229,6 +229,20 @@ class Calendar
     sig { params(args: T.untyped, blk: T.untyped).returns(::App) }
     def build_app(*args, &blk); end
 
+    sig { returns(T::Array[T.untyped]) }
+    def calendar_date_ids; end
+
+    sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
+    def calendar_date_ids=(ids); end
+
+    # This method is created by ActiveRecord on the `Calendar` class because it declared `has_many :calendar_dates`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
+    sig { returns(::CalendarDate::PrivateCollectionProxy) }
+    def calendar_dates; end
+
+    sig { params(value: T::Enumerable[::CalendarDate]).void }
+    def calendar_dates=(value); end
+
     sig { params(args: T.untyped, blk: T.untyped).returns(::App) }
     def create_app(*args, &blk); end
 

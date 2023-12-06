@@ -320,6 +320,20 @@ class CalendarDate
 
     sig { returns(T.nilable(::Calendar)) }
     def reload_calendar; end
+
+    sig { returns(T::Array[T.untyped]) }
+    def trip_ids; end
+
+    sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
+    def trip_ids=(ids); end
+
+    # This method is created by ActiveRecord on the `CalendarDate` class because it declared `has_many :trips`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
+    sig { returns(::Trip::PrivateCollectionProxy) }
+    def trips; end
+
+    sig { params(value: T::Enumerable[::Trip]).void }
+    def trips=(value); end
   end
 
   module GeneratedAssociationRelationMethods
@@ -569,10 +583,10 @@ class CalendarDate
     sig { void }
     def app_id_will_change!; end
 
-    sig { returns(::Integer) }
+    sig { returns(T.nilable(::Integer)) }
     def calendar_id; end
 
-    sig { params(value: ::Integer).returns(::Integer) }
+    sig { params(value: T.nilable(::Integer)).returns(T.nilable(::Integer)) }
     def calendar_id=(value); end
 
     sig { returns(T::Boolean) }
@@ -587,22 +601,22 @@ class CalendarDate
     sig { returns(T::Boolean) }
     def calendar_id_came_from_user?; end
 
-    sig { returns(T.nilable([::Integer, ::Integer])) }
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def calendar_id_change; end
 
-    sig { returns(T.nilable([::Integer, ::Integer])) }
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def calendar_id_change_to_be_saved; end
 
-    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
     def calendar_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def calendar_id_in_database; end
 
-    sig { returns(T.nilable([::Integer, ::Integer])) }
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def calendar_id_previous_change; end
 
-    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
     def calendar_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
@@ -759,6 +773,51 @@ class CalendarDate
     sig { void }
     def exception_type_will_change!; end
 
+    sig { returns(::String) }
+    def gtfs_service_id; end
+
+    sig { params(value: ::String).returns(::String) }
+    def gtfs_service_id=(value); end
+
+    sig { returns(T::Boolean) }
+    def gtfs_service_id?; end
+
+    sig { returns(T.nilable(::String)) }
+    def gtfs_service_id_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def gtfs_service_id_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def gtfs_service_id_came_from_user?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def gtfs_service_id_change; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def gtfs_service_id_change_to_be_saved; end
+
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def gtfs_service_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def gtfs_service_id_in_database; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def gtfs_service_id_previous_change; end
+
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def gtfs_service_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def gtfs_service_id_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def gtfs_service_id_was; end
+
+    sig { void }
+    def gtfs_service_id_will_change!; end
+
     sig { returns(T.nilable(::Integer)) }
     def id; end
 
@@ -865,6 +924,9 @@ class CalendarDate
     def restore_exception_type!; end
 
     sig { void }
+    def restore_gtfs_service_id!; end
+
+    sig { void }
     def restore_id!; end
 
     sig { void }
@@ -879,7 +941,7 @@ class CalendarDate
     sig { returns(T::Boolean) }
     def saved_change_to_app_id?; end
 
-    sig { returns(T.nilable([::Integer, ::Integer])) }
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def saved_change_to_calendar_id; end
 
     sig { returns(T::Boolean) }
@@ -902,6 +964,12 @@ class CalendarDate
 
     sig { returns(T::Boolean) }
     def saved_change_to_exception_type?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def saved_change_to_gtfs_service_id; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_gtfs_service_id?; end
 
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def saved_change_to_id; end
@@ -980,6 +1048,9 @@ class CalendarDate
 
     sig { returns(T::Boolean) }
     def will_save_change_to_exception_type?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_gtfs_service_id?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_id?; end

@@ -291,32 +291,17 @@ class Trip
     sig { params(args: T.untyped, blk: T.untyped).returns(::App) }
     def build_app(*args, &blk); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(::Calendar) }
-    def build_calendar(*args, &blk); end
-
     sig { params(args: T.untyped, blk: T.untyped).returns(::Route) }
     def build_route(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(::Shape) }
     def build_shape(*args, &blk); end
 
-    sig { returns(T.nilable(::Calendar)) }
-    def calendar; end
-
-    sig { params(value: T.nilable(::Calendar)).void }
-    def calendar=(value); end
-
     sig { params(args: T.untyped, blk: T.untyped).returns(::App) }
     def create_app(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(::App) }
     def create_app!(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(::Calendar) }
-    def create_calendar(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(::Calendar) }
-    def create_calendar!(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(::Route) }
     def create_route(*args, &blk); end
@@ -333,11 +318,11 @@ class Trip
     sig { returns(T.nilable(::App)) }
     def reload_app; end
 
-    sig { returns(T.nilable(::Calendar)) }
-    def reload_calendar; end
-
     sig { returns(T.nilable(::Route)) }
     def reload_route; end
+
+    sig { returns(T.untyped) }
+    def reload_service; end
 
     sig { returns(T.nilable(::Shape)) }
     def reload_shape; end
@@ -347,6 +332,12 @@ class Trip
 
     sig { params(value: T.nilable(::Route)).void }
     def route=(value); end
+
+    sig { returns(T.untyped) }
+    def service; end
+
+    sig { params(value: T.untyped).void }
+    def service=(value); end
 
     sig { returns(T.nilable(::Shape)) }
     def shape; end
@@ -742,51 +733,6 @@ class Trip
     sig { void }
     def block_id_will_change!; end
 
-    sig { returns(T.nilable(::Integer)) }
-    def calendar_id; end
-
-    sig { params(value: T.nilable(::Integer)).returns(T.nilable(::Integer)) }
-    def calendar_id=(value); end
-
-    sig { returns(T::Boolean) }
-    def calendar_id?; end
-
-    sig { returns(T.nilable(::Integer)) }
-    def calendar_id_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def calendar_id_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def calendar_id_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
-    def calendar_id_change; end
-
-    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
-    def calendar_id_change_to_be_saved; end
-
-    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
-    def calendar_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
-
-    sig { returns(T.nilable(::Integer)) }
-    def calendar_id_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
-    def calendar_id_previous_change; end
-
-    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
-    def calendar_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
-
-    sig { returns(T.nilable(::Integer)) }
-    def calendar_id_previously_was; end
-
-    sig { returns(T.nilable(::Integer)) }
-    def calendar_id_was; end
-
-    sig { void }
-    def calendar_id_will_change!; end
-
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at; end
 
@@ -1036,9 +982,6 @@ class Trip
     def restore_block_id!; end
 
     sig { void }
-    def restore_calendar_id!; end
-
-    sig { void }
     def restore_created_at!; end
 
     sig { void }
@@ -1055,6 +998,12 @@ class Trip
 
     sig { void }
     def restore_route_id!; end
+
+    sig { void }
+    def restore_service_id!; end
+
+    sig { void }
+    def restore_service_type!; end
 
     sig { void }
     def restore_shape_id!; end
@@ -1134,12 +1083,6 @@ class Trip
     sig { returns(T::Boolean) }
     def saved_change_to_block_id?; end
 
-    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
-    def saved_change_to_calendar_id; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_calendar_id?; end
-
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def saved_change_to_created_at; end
 
@@ -1176,6 +1119,18 @@ class Trip
     sig { returns(T::Boolean) }
     def saved_change_to_route_id?; end
 
+    sig { returns(T.nilable([::String, ::String])) }
+    def saved_change_to_service_id; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_service_id?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def saved_change_to_service_type; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_service_type?; end
+
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def saved_change_to_shape_id; end
 
@@ -1205,6 +1160,96 @@ class Trip
 
     sig { returns(T::Boolean) }
     def saved_change_to_wheelchair_accessible?; end
+
+    sig { returns(::String) }
+    def service_id; end
+
+    sig { params(value: ::String).returns(::String) }
+    def service_id=(value); end
+
+    sig { returns(T::Boolean) }
+    def service_id?; end
+
+    sig { returns(T.nilable(::String)) }
+    def service_id_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def service_id_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def service_id_came_from_user?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def service_id_change; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def service_id_change_to_be_saved; end
+
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def service_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def service_id_in_database; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def service_id_previous_change; end
+
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def service_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def service_id_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def service_id_was; end
+
+    sig { void }
+    def service_id_will_change!; end
+
+    sig { returns(::String) }
+    def service_type; end
+
+    sig { params(value: ::String).returns(::String) }
+    def service_type=(value); end
+
+    sig { returns(T::Boolean) }
+    def service_type?; end
+
+    sig { returns(T.nilable(::String)) }
+    def service_type_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def service_type_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def service_type_came_from_user?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def service_type_change; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def service_type_change_to_be_saved; end
+
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def service_type_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def service_type_in_database; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def service_type_previous_change; end
+
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def service_type_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def service_type_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def service_type_was; end
+
+    sig { void }
+    def service_type_will_change!; end
 
     sig { returns(T.nilable(::Integer)) }
     def shape_id; end
@@ -1455,9 +1500,6 @@ class Trip
     def will_save_change_to_block_id?; end
 
     sig { returns(T::Boolean) }
-    def will_save_change_to_calendar_id?; end
-
-    sig { returns(T::Boolean) }
     def will_save_change_to_created_at?; end
 
     sig { returns(T::Boolean) }
@@ -1474,6 +1516,12 @@ class Trip
 
     sig { returns(T::Boolean) }
     def will_save_change_to_route_id?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_service_id?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_service_type?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_shape_id?; end

@@ -15,4 +15,26 @@ class Trip < ApplicationRecord
 
   validates :route, :service, :gtfs_trip_id, presence: true
   validates :shape, presence: true, if: proc { |trip| trip.route.any_continuous? }
+
+  sig { returns(String) }
+  # rubocop:disable Metrics/MethodLength
+  def serialize
+    {
+      id:,
+      gtfs_trip_id:,
+      app_id:,
+      route_id:,
+      service_id:,
+      service_type:,
+      trip_headsign:,
+      trip_short_name:,
+      direction:,
+      block_id:,
+      shape_id:,
+      wheelchair_accessible:,
+      bikes_allowed:,
+      created_at:,
+      updated_at:
+    }.to_json
+  end
 end
