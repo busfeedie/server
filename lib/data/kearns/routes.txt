@@ -1,0 +1,7 @@
+route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color
+3183_40446,7778048,UM02,"Birr, Birr Square - Maynooth, Straffan Road",,3,,,
+3574_40488,7778048,820,"Edenderry (Ulster Bank) - Enfield, Main Street, SuperValu",,3,,,
+3574_40490,7778048,844,"Birr (Post Office Emmett Square) - Galway, Merchants Road Galway",,3,,,
+3574_40491,7778048,845,"Kinnegad, Kinnegad Harry's - Dublin City South, Saint Stephen's Green House",,3,,,
+3574_40492,7778048,847,"Portumna, Portumna - Dublin, Cathal Brugha Street",,3,,,
+3574_53725,7778048,843,"Birr, Birr Square - Tullamore Hospital",,3,,,
