@@ -3,9 +3,11 @@
 
 RSpec.describe ::Calendar, type: :model do
   context 'when creating a new calendar' do
+    let(:app) { create(:app) }
     it 'should create a new calendar with all attributes populated' do
       expect do
         ::Calendar.create!(
+          app:,
           gtfs_service_id: '123-1-1',
           start_date: '2023-08-17',
           end_date: '2023-09-25',

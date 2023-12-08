@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :route, class: '::Route' do
+    app { create(:app) }
     gtfs_route_id { '123-a-5' }
     agency { create(:agency) }
     route_short_name { '123' }

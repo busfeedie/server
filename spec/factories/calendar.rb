@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :calendar, class: '::Calendar' do
+    app { create(:app) }
     gtfs_service_id { '123-1-1' }
     start_date { '2020-11-14' }
     end_date { '2023-11-15' }

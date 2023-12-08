@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :agency, class: '::Agency' do
+    app { create(:app) }
     gtfs_agency_id { '123' }
     agency_name { 'Agency Name' }
     agency_url { 'https://example.com' }

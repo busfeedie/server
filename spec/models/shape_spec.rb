@@ -2,10 +2,12 @@
 # typed: false
 
 RSpec.describe ::Shape, type: :model do
+  let(:app) { create(:app) }
   context 'when creating a new Shape' do
     it 'should create a new Shape with all attributes populated' do
       expect do
         ::Shape.create!(
+          app:,
           gtfs_shape_id: '123',
           lonlat: 'POINT(-122.123456 47.123456)',
           shape_pt_sequence: 1,

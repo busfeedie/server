@@ -2,10 +2,12 @@
 # typed: false
 
 RSpec.describe ::Route, type: :model do
+  let(:app) { create(:app) }
   context 'when creating a new route' do
     it 'should create a new route with all attributes populated' do
       expect do
         ::Route.create!(
+          app:,
           gtfs_route_id: '123-a-5',
           agency: create(:agency),
           route_short_name: '123',
@@ -26,6 +28,7 @@ RSpec.describe ::Route, type: :model do
   it 'validates that long name or short name is present' do
     expect do
       ::Route.create!(
+        app:,
         gtfs_route_id: '123-a-5',
         agency: create(:agency),
         route_type: :bus
@@ -33,6 +36,7 @@ RSpec.describe ::Route, type: :model do
     end.to raise_error(ActiveRecord::RecordInvalid)
     expect do
       ::Route.create!(
+        app:,
         gtfs_route_id: '123-a-5',
         agency: create(:agency),
         route_long_name: 'to City Centre',
@@ -41,6 +45,7 @@ RSpec.describe ::Route, type: :model do
     end.to change { ::Route.count }.by(1)
     expect do
       ::Route.create!(
+        app:,
         gtfs_route_id: '123-a-5',
         agency: create(:agency),
         route_short_name: 'to City Centre',

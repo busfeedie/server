@@ -3,9 +3,11 @@
 
 RSpec.describe ::Agency, type: :model do
   context 'when creating a new Agency' do
+    let(:app) { create(:app) }
     it 'should create a new Agency with all attributes populated' do
       expect do
         ::Agency.create!(
+          app:,
           gtfs_agency_id: '123',
           agency_name: 'Agency Name',
           agency_url: 'https://example.com',
