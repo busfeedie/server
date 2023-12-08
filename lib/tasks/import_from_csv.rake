@@ -44,7 +44,7 @@ task :import_from_csv, %i[csv_folder_name app_id] => :environment do |_t, args|
         calendar: ::Calendar.find_by(gtfs_service_id: row['service_id']),
         gtfs_service_id: row['service_id'],
         date: row['date'],
-        exception_type: row['exception_type'].to_i
+        exception_type: row['exception_type'].presence&.to_i
       )
     end
     Rails.logger.info("Importing data from #{path}routes.txt")
@@ -56,13 +56,13 @@ task :import_from_csv, %i[csv_folder_name app_id] => :environment do |_t, args|
         route_short_name: row['route_short_name'],
         route_long_name: row['route_long_name'],
         route_desc: row['route_desc'],
-        route_type: row['route_type'].to_i,
+        route_type: row['route_type'].presence&.to_i,
         route_url: row['route_url'],
         route_color: row['route_color'],
         route_text_color: row['route_text_color'],
         route_sort_order: row['route_sort_order'],
-        continuous_pickup: row['continuous_pickup'].to_i,
-        continuous_drop_off: row['continuous_drop_off'].to_i,
+        continuous_pickup: row['continuous_pickup'].presence&.to_i,
+        continuous_drop_off: row['continuous_drop_off'].presence&.to_i,
         gtfs_network_id: row['network_id']
       )
     end
@@ -110,10 +110,10 @@ task :import_from_csv, %i[csv_folder_name app_id] => :environment do |_t, args|
         departure_time: row['departure_time'],
         stop_sequence: row['stop_sequence'],
         stop_headsign: row['stop_headsign'],
-        pickup_type: row['pickup_type'].to_i,
-        drop_off_type: row['drop_off_type'].to_i,
-        continuous_pickup: row['continuous_pickup'].to_i,
-        continuous_drop_off: row['continuous_drop_off'].to_i,
+        pickup_type: row['pickup_type'].presence&.to_i,
+        drop_off_type: row['drop_off_type'].presence&.to_i,
+        continuous_pickup: row['continuous_pickup'].presence&.to_i,
+        continuous_drop_off: row['continuous_drop_off'].presence&.to_i,
         shape_dist_traveled: row['shape_dist_traveled'],
         timepoint: row['timepoint']
       )
@@ -127,11 +127,11 @@ task :import_from_csv, %i[csv_folder_name app_id] => :environment do |_t, args|
         service: ::Calendar.find_by(gtfs_service_id: row['service_id']) || ::CalendarDate.find_by(gtfs_service_id: row['service_id']),
         trip_headsign: row['trip_headsign'],
         trip_short_name: row['trip_short_name'],
-        direction: row['direction_id'].to_i,
+        direction: row['direction_id'].presence&.to_i,
         block_id: row['block_id'],
         shape: ::Shape.find_by(gtfs_shape_id: row['shape_id']),
-        wheelchair_accessible: row['wheelchair_accessible'].to_i,
-        bikes_allowed: row['bikes_allowed'].to_i
+        wheelchair_accessible: row['wheelchair_accessible'].presence&.to_i,
+        bikes_allowed: row['bikes_allowed'].presence&.to_i
       )
     end
   end
