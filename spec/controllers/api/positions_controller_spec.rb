@@ -3,8 +3,9 @@
 
 RSpec.describe Api::PositionsController, type: :controller do
   describe 'create' do
+    let(:app) { create(:app) }
+    let(:params) { { lat: 47.621, lon: -122.345, app_id: app.id } }
     it 'should create a new position from the lat and lon parameters' do
-      params = { lat: 47.621, lon: -122.345 }
       expect do
         post :create, params:
       end.to change { ::VehiclePosition.count }.by(1)
@@ -16,7 +17,7 @@ RSpec.describe Api::PositionsController, type: :controller do
     end
 
     it 'should create a new position from a point' do
-      params = { lat: 47.621, lon: -122.345, trip: { start_time: '22:50:00' } }
+      params[:trip] = { start_time: '22:50:00' }
       expect do
         post :create, params:
       end.to change { ::VehiclePosition.count }.by(1)
