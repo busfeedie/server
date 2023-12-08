@@ -12,6 +12,9 @@ module GeneratedPathHelpersModule
   def api_positions_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def api_trips_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

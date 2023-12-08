@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   namespace :api do
-    resource :positions, only: [:create]
+    resources :positions, only: [:create]
+    resources :trips, only: %i[create index]
   end
 
   # Defines the root path route ("/")

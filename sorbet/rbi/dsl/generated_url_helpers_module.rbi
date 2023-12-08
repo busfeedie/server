@@ -12,6 +12,9 @@ module GeneratedUrlHelpersModule
   def api_positions_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def api_trips_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_source_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
