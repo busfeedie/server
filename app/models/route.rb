@@ -30,14 +30,10 @@ class Route < ApplicationRecord
   end
 
   sig { returns(T::Boolean) }
-  def continuous_pickup_available?
-    !continuous_pickup_none?
-  end
+  def continuous_pickup_available? = !continuous_pickup_none?
 
   sig { returns(T::Boolean) }
-  def continuous_drop_off_available?
-    !continuous_drop_off_none?
-  end
+  def continuous_drop_off_available? = !continuous_drop_off_none?
 
   sig { void }
   def refresh_gtfs_route_id
@@ -47,5 +43,18 @@ class Route < ApplicationRecord
   sig { void }
   def refresh_gtfs_agency_id
     self.gtfs_agency_id = T.must(agency).gtfs_agency_id
+  end
+
+  sig { returns(T::Hash[Symbol, T.untyped]) }
+  def serialize
+    {
+      id:,
+      app_id:,
+      gtfs_route_id:,
+      route_short_name:,
+      route_long_name:,
+      route_desc:,
+      agency_id:
+    }
   end
 end
