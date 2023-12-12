@@ -13,5 +13,6 @@ class App < ActiveRecord::Base
   has_many :stop_times, inverse_of: :app
   has_many :trips, inverse_of: :app
   has_many :trip_identifiers, inverse_of: :app
+  has_many :users, inverse_of: :app
   has_many :vehicle_positions, inverse_of: :app
 end
