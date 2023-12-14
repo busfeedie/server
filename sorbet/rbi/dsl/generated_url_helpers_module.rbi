@@ -12,13 +12,37 @@ module GeneratedUrlHelpersModule
   def api_positions_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def api_routes_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def api_trips_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def cancel_user_registration_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def destroy_user_session_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def edit_user_password_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def edit_user_registration_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_source_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_user_password_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_user_registration_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_user_session_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def rails_blob_representation_proxy_url(*args); end
@@ -109,4 +133,13 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def update_rails_disk_service_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def user_password_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def user_registration_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def user_session_url(*args); end
 end
