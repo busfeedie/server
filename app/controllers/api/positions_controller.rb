@@ -3,9 +3,8 @@
 
 module Api
   # This controller is used to manage the live position of vehicles
-  class PositionsController < ApplicationController
+  class PositionsController < ApiController
     extend ::T::Sig
-    protect_from_forgery with: :null_session
     before_action :load_app
 
     sig { returns(String) }
