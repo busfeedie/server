@@ -6,7 +6,6 @@ module Api
   class TripsController < ApiController
     extend ::T::Sig
     protect_from_forgery with: :null_session
-    before_action :load_app
 
     sig { returns(String) }
     def index
