@@ -5,6 +5,12 @@ RSpec.describe Api::PositionsController, type: :controller do
   describe 'create' do
     let(:app) { create(:app) }
     let(:params) { { lat: 47.621, lon: -122.345, app_id: app.id } }
+    let(:user) { create(:user, app:) }
+
+    before do
+      login_user(user:)
+    end
+
     it 'should create a new position from the lat and lon parameters' do
       expect do
         post :create, params:
@@ -24,6 +30,16 @@ RSpec.describe Api::PositionsController, type: :controller do
       expect(response).to have_http_status(:success)
       position = ::VehiclePosition.last
       expect(position.trip_identifier.start_time_string).to eq('22:50:00')
+    end
+
+    it 'should not add a position for a different app' do
+      other_app = create(:app)
+      params[:app_id] = other_app.id
+      params[:trip] = { start_time: '22:50:00' }
+      expect do
+        post :create, params:
+      end.to change { ::VehiclePosition.count }.by(0)
+      expect(response).to have_http_status(:forbidden)
     end
   end
 end

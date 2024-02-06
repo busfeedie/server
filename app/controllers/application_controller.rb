@@ -6,7 +6,7 @@
 class ApplicationController < ActionController::Base
   extend ::T::Sig
 
-  sig { returns(App) }
+  sig { returns(T.nilable(App)) }
   def load_app
     params.require(:app_id)
     @app = T.let(nil, T.nilable(App))
