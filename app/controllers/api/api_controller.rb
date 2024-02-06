@@ -15,7 +15,7 @@ module Api
     sig { returns(T.nilable(String)) }
     def verify_app_access
       @app = load_app
-      return unless @app.blank? || @app.id != current_user.app_id
+      return unless @app.id != current_user.app_id
 
       render json: {
         'errors': [

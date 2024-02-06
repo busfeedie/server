@@ -6,10 +6,11 @@
 class ApplicationController < ActionController::Base
   extend ::T::Sig
 
-  sig { returns(T.nilable(App)) }
+  sig { returns(App) }
   def load_app
     params.require(:app_id)
     @app = T.let(nil, T.nilable(App))
     @app = App.find(params[:app_id])
+    redirect_to user_session_path if @app.blank?
   end
 end

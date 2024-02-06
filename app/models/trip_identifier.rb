@@ -6,6 +6,7 @@ class TripIdentifier < ApplicationRecord
   extend T::Sig
 
   has_many :vehicle_positions, inverse_of: :trip_identifier
+  belongs_to :trip, optional: true
 
   @start_date = T.let(nil, T.nilable(Date))
   @start_time = T.let(nil, T.nilable(Time))
