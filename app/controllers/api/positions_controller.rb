@@ -37,11 +37,10 @@ module Api
     end
 
     def get_trip(trip_data:)
-      trip = ::Trip.find_by(app_id: T.must(@app).id, id: trip_data[:trip_id]) if trip_data[:trip_id].present?
+      trip = ::Trip.find_by(app: @app, id: trip_data[:trip_id]) if trip_data[:trip_id].present?
       return trip unless trip.blank?
 
-      trip ||= ::Trip.find_by(app_id: T.must(@app).id,
-                              gtfs_trip_id: trip_data[:gtfs_trip_id])
+      trip ||= ::Trip.find_by(app: @app, gtfs_trip_id: trip_data[:gtfs_trip_id]) if trip_data[:gtfs_trip_id].present?
       trip
     end
 
