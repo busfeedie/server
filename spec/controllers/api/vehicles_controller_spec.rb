@@ -26,4 +26,30 @@ RSpec.describe Api::VehiclesController, type: :controller do
       expect(vehicle.wheelchair_access_accessible?).to eq(true)
     end
   end
+
+  describe 'index' do
+    let(:app) { create(:app) }
+    let(:user) { create(:user, app:) }
+
+    before do
+      login_user(user:)
+    end
+
+    context 'with no vehicles' do
+      it 'should return no vehicles' do
+        get(:index)
+        expect(response).to have_http_status(:success)
+        expect(response.body).to eq('[]')
+      end
+    end
+
+    context 'with a vehicle' do
+      let!(:vehicle) { create(:vehicle, app:) }
+      it 'should return the vehicle' do
+        get(:index)
+        expect(response).to have_http_status(:success)
+        expect(response.body).to eq([vehicle.serialize].to_json)
+      end
+    end
+  end
 end

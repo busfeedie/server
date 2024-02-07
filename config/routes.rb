@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     resources :positions, only: [:create]
     resources :routes, only: %i[index]
     resources :trips, only: %i[index]
-    resources :vehicles, only: [:create]
+    resources :vehicles, only: %i[create index]
   end
   # ============ end API ============
 

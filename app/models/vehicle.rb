@@ -16,4 +16,17 @@ class Vehicle < ApplicationRecord
           wheelchair_access_inaccessible]
 
   validates :app, presence: true
+
+  sig { returns(T::Hash[Symbol, T.untyped]) }
+  def serialize
+    {
+      id:,
+      app_id:,
+      label:,
+      license_plate:,
+      wheelchair_accessible:,
+      created_at:,
+      updated_at:
+    }
+  end
 end

@@ -13,5 +13,11 @@ module Api
                                   wheelchair_accessible: params[:wheelchair_accessible])
       render json: vehicle
     end
+
+    sig { returns(String) }
+    def index
+      vehicles = ::Vehicle.where(app: @app)
+      render json: vehicles.map(&:serialize)
+    end
   end
 end
