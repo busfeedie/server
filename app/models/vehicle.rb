@@ -11,7 +11,9 @@ class Vehicle < ApplicationRecord
   has_many :vehicle_positions, inverse_of: :vehicle
   belongs_to :app
 
-  enum :wheelchair_accessible, %i[no_value unknown accessible inaccessible], _prefix: true
+  enum :wheelchair_accessible,
+       %i[wheelchair_access_no_value wheelchair_access_unknown wheelchair_access_accessible
+          wheelchair_access_inaccessible]
 
   validates :app, presence: true
 end

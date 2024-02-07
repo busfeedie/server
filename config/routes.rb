@@ -23,8 +23,9 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: 'json' } do
     resources :positions, only: [:create]
-    resources :trips, only: %i[index]
     resources :routes, only: %i[index]
+    resources :trips, only: %i[index]
+    resources :vehicles, only: [:create]
   end
   # ============ end API ============
 
