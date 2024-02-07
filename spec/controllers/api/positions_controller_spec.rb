@@ -66,4 +66,22 @@ RSpec.describe Api::PositionsController, type: :controller do
       expect(position.trip).to eq(trip)
     end
   end
+  describe 'latest' do
+    let(:app) { create(:app) }
+    let(:trip) { create(:trip, app:) }
+    let(:vehicle) { create(:vehicle, app:) }
+    let!(:position) { create(:vehicle_position, app:, trip:, vehicle:) }
+    let(:params) { { trip: { trip_id: trip.id }, vehicle_id: vehicle.id } }
+    let(:user) { create(:user, app:) }
+
+    before do
+      login_user(user:)
+    end
+
+    it 'should return the last position when both trip and vehicle are supplied' do
+      get(:latest, params:)
+      expect(response).to have_http_status(:success)
+      expect(response.body).to eq(position.to_json)
+    end
+  end
 end
