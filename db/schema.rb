@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_06_212239) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_07_201418) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -209,9 +209,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_06_212239) do
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.bigint "trip_id"
     t.bigint "app_id", null: false
+    t.bigint "vehicle_id"
     t.index ["app_id"], name: "index_vehicle_positions_on_app_id"
     t.index ["trip_id"], name: "index_vehicle_positions_on_trip_id"
     t.index ["trip_identifier_id"], name: "index_vehicle_positions_on_trip_identifier_id"
+    t.index ["vehicle_id"], name: "index_vehicle_positions_on_vehicle_id"
+  end
+
+  create_table "vehicles", force: :cascade do |t|
+    t.string "label"
+    t.string "license_plate"
+    t.integer "wheelchair_accessible"
+    t.bigint "app_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["app_id"], name: "index_vehicles_on_app_id"
   end
 
   add_foreign_key "calendar_dates", "calendars"

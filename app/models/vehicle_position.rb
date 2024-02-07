@@ -16,6 +16,8 @@ class VehiclePosition < ApplicationRecord
 
   belongs_to :trip_identifier, optional: true
   belongs_to :trip, optional: true
+  belongs_to :app
+  belongs_to :vehicle, optional: true
 
   enum :vehicle_stop_status, %i[incoming_at stopped_at in_transit_to]
   enum :congestion_level, %i[unknown running_smoothly stop_and_go congestion sever_congestion]

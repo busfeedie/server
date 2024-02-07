@@ -9,10 +9,16 @@ module Api
 
     sig { returns(String) }
     def create
-      factory = RGeo::Geographic.spherical_factory(srid: 4326)
-      p = factory.point(params[:lon], params[:lat])
+      p = geo_point(lon: params[:lon], lat: params[:lat])
       trip_identifier = create_trip_identifier if params[:trip].present?
-      position = ::VehiclePosition.create!(lonlat: p, trip_identifier:, app: @app, trip: trip_identifier.trip)
+      vehicle = ::Vehicle.find_by(app_id: T.must(@app).id, id: params[:vehicle_id])
+      position = ::VehiclePosition.create!(
+        lonlat: p,
+        trip_identifier:,
+        app: @app,
+        trip: trip_identifier&.trip,
+        vehicle:
+      )
       render json: position
     end
 
@@ -37,6 +43,11 @@ module Api
       trip ||= ::Trip.find_by(app_id: T.must(@app).id,
                               gtfs_trip_id: trip_data[:gtfs_trip_id])
       trip
+    end
+
+    sig { params(lat: String, lon: String).returns(RGeo::Geographic::SphericalPointImpl) }
+    def geo_point(lat:, lon:)
+      RGeo::Geographic.spherical_factory(srid: 4326).point(lon, lat)
     end
   end
 end

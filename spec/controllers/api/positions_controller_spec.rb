@@ -32,14 +32,38 @@ RSpec.describe Api::PositionsController, type: :controller do
       expect(position.trip_identifier.start_time_string).to eq('22:50:00')
     end
 
-    it 'should not add a position for a different app' do
-      other_app = create(:app)
-      params[:app_id] = other_app.id
-      params[:trip] = { start_time: '22:50:00' }
+    it 'should create a new position for a vehicle' do
+      vehicle = create(:vehicle, app:)
+      params[:vehicle_id] = vehicle.id
       expect do
         post :create, params:
-      end.to change { ::VehiclePosition.count }.by(0)
-      expect(response).to have_http_status(:forbidden)
+      end.to change { ::VehiclePosition.count }.by(1)
+      expect(response).to have_http_status(:success)
+      position = ::VehiclePosition.last
+      expect(position.vehicle).to eq(vehicle)
+    end
+
+    it 'should create a new position for a trip' do
+      trip = create(:trip, app:)
+      params[:trip] = { trip_id: trip.id }
+      expect do
+        post :create, params:
+      end.to change { ::VehiclePosition.count }.by(1)
+      expect(response).to have_http_status(:success)
+      position = ::VehiclePosition.last
+      expect(position.trip).to eq(trip)
+    end
+
+    it 'should create a new position for a trip identifier' do
+      trip = create(:trip, app:)
+      params[:trip] = { gtfs_trip_id: '123' }
+      expect do
+        post :create, params:
+      end.to change { ::VehiclePosition.count }.by(1)
+      expect(response).to have_http_status(:success)
+      position = ::VehiclePosition.last
+      expect(position.trip_identifier.gtfs_trip_id).to eq(123)
+      expect(position.trip).to eq(trip)
     end
   end
 end

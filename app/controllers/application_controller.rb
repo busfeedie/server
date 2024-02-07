@@ -12,5 +12,6 @@ class ApplicationController < ActionController::Base
     @app = T.let(nil, T.nilable(App))
     @app = App.find(params[:app_id])
     redirect_to user_session_path if @app.blank?
+    @app
   end
 end

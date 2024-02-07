@@ -8,23 +8,14 @@ module Api
     protect_from_forgery with: :null_session
 
     before_action :authenticate_user!
-    before_action :verify_app_access
 
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
-    sig { returns(T.nilable(String)) }
-    def verify_app_access
-      @app = load_app
-      return unless @app.id != current_user.app_id
-
-      render json: {
-        'errors': [
-          {
-            'status': '403',
-            'title': 'Forbidden'
-          }
-        ]
-      }, status: 403
+    sig { returns(App) }
+    def load_app
+      @app = current_user.app
+      redirect_to user_session_path if @app.blank?
+      @app
     end
 
     sig { returns(String) }
