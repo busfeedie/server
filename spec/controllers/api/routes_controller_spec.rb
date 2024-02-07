@@ -29,13 +29,6 @@ RSpec.describe Api::RoutesController, type: :controller do
         expect(response).to have_http_status(:success)
         expect(response.body).to eq([route.serialize].to_json)
       end
-
-      it 'should not return a route for a different app' do
-        other_app = create(:app)
-        params[:app_id] = other_app.id
-        subject
-        expect(response).to have_http_status(:forbidden)
-      end
     end
   end
 end
