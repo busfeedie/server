@@ -24,8 +24,8 @@ module Api
 
     sig { returns(String) }
     def latest
-      position = get_latest_position_from_trip
-      position = get_latest_position_from_vehicle if position.blank?
+      position = latest_position_from_trip
+      position = latest_position_from_vehicle if position.blank?
       render json: position
     end
 
@@ -33,8 +33,7 @@ module Api
 
     sig { returns ::TripIdentifier }
     def create_trip_identifier
-      trip_data = get_trip_data
-      trip = get_trip(trip_data:)
+      trip = trip(trip_data:)
       ::TripIdentifier.find_or_create_by!(start_date: trip_data[:start_date],
                                           start_time: trip_data[:start_time],
                                           app: @app,
@@ -42,19 +41,19 @@ module Api
                                           trip:)
     end
 
-    def get_latest_position_from_trip
-      trip = get_trip(trip_data: get_trip_data) if params[:trip].present?
+    def latest_position_from_trip
+      trip = trip(trip_data:) if params[:trip].present?
       position = ::VehiclePosition.where(app: @app, trip:).order(:created_at).last if trip.present?
       position
     end
 
-    def get_latest_position_from_vehicle
+    def latest_position_from_vehicle
       vehicle = ::Vehicle.find_by(app: @app, id: params[:vehicle_id]) if params[:vehicle_id].present?
       position = ::VehiclePosition.where(app: @app, vehicle:).order(:created_at).last if vehicle.present?
       position
     end
 
-    def get_trip(trip_data:)
+    def trip(trip_data:)
       trip = ::Trip.find_by(app: @app, id: trip_data[:trip_id]) if trip_data[:trip_id].present?
       return trip unless trip.blank?
 
@@ -68,9 +67,9 @@ module Api
     end
 
     sig { returns ::ActionController::Parameters }
-    def get_trip_data
-      trip_data = T.cast(params[:trip], ActionController::Parameters).permit(:start_date, :start_time, :trip_id,
-                                                                             :gtfs_trip_id)
+    def trip_data
+      @trip_data ||= T.cast(params[:trip], ActionController::Parameters).permit(:start_date, :start_time, :trip_id,
+                                                                                :gtfs_trip_id)
     end
   end
 end
