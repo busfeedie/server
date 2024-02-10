@@ -72,7 +72,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "server_production"
 
   # TODO: config for devise production
-  config.action_mailer.default_url_options = null
+  config.action_mailer.default_url_options = { host: 'api.busfeed.ie' }
 
   config.action_mailer.perform_caching = false
 
