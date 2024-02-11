@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_07_201418) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_11_203444) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -109,8 +109,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_07_201418) do
   create_table "stop_times", force: :cascade do |t|
     t.bigint "trip_id", null: false
     t.bigint "stop_id", null: false
-    t.time "arrival_time"
-    t.time "departure_time"
     t.integer "stop_sequence", null: false
     t.string "stop_headsign"
     t.integer "pickup_type", default: 0, null: false
@@ -122,6 +120,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_07_201418) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "app_id", null: false
+    t.bigint "arrival_time", null: false
+    t.bigint "departure_time", null: false
     t.index ["app_id"], name: "index_stop_times_on_app_id"
     t.index ["stop_id"], name: "index_stop_times_on_stop_id"
     t.index ["trip_id"], name: "index_stop_times_on_trip_id"

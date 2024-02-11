@@ -38,4 +38,13 @@ class StopTime < ApplicationRecord
       updated_at:
     }
   end
+
+  sig { params(stop_time: String).returns(ActiveSupport::Duration) }
+  def self.duration_from_time_string(stop_time)
+    return ActiveSupport::Duration.build(0) if stop_time.blank? || stop_time.split(/:/).size < 2
+
+    hours, minutes, seconds = stop_time.split(/:/).map(&:to_i)
+    seconds = (T.must(hours) * 3600 + T.must(minutes) * 60) + (seconds || 0)
+    ActiveSupport::Duration.build(seconds)
+  end
 end
