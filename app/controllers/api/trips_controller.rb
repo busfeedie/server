@@ -10,7 +10,9 @@ module Api
 
     sig { returns(String) }
     def index
-      render json: ::Trip.where(app: @app).map(&:serialize)
+      trips = ::Trip.where(app: @app)
+      trips = trips.where(route_id: params[:route_id]) if params[:route_id].present?
+      render json: trips.map(&:serialize)
     end
   end
 end

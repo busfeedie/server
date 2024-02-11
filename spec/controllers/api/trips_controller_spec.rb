@@ -29,6 +29,18 @@ RSpec.describe Api::TripsController, type: :controller do
         expect(response).to have_http_status(:success)
         expect(response.body).to eq([trip.serialize].to_json)
       end
+      it 'returns the trip if the route id matches' do
+        params[:route_id] = trip.route_id
+        subject
+        expect(response).to have_http_status(:success)
+        expect(response.body).to eq([trip.serialize].to_json)
+      end
+      it 'returns nothing if the route id does not match' do
+        params[:route_id] = '1565616841631365'
+        subject
+        expect(response).to have_http_status(:success)
+        expect(response.body).to eq([].to_json)
+      end
     end
   end
 end
