@@ -15,5 +15,11 @@ module Api
       trips = trips.select { |trip| trip.runs_on_date(date: Date.parse(params[:date])) } if params[:date].present?
       render json: trips.map(&:serialize)
     end
+
+    sig { returns(String) }
+    def stops
+      trip = ::Trip.find(params[:id])
+      render json: ::StopTime.where(app: @app, trip:).map(&:serialize)
+    end
   end
 end

@@ -29,7 +29,11 @@ Rails.application.routes.draw do
       end
     end
     resources :routes, only: %i[index]
-    resources :trips, only: %i[index]
+    resources :trips, only: %i[index] do
+      member do
+        get :stops
+      end
+    end
     resources :vehicles, only: %i[create index]
   end
   # ============ end API ============

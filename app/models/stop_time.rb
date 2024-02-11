@@ -15,4 +15,27 @@ class StopTime < ApplicationRecord
 
   validates :trip, :stop, :stop_sequence, presence: true
   validates :arrival_time, :departure_time, presence: true, if: proc { |stop_time| stop_time.timepoint }
+
+  sig { returns(T::Hash[Symbol, T.untyped]) }
+  # rubocop:disable Metrics/MethodLength
+  def serialize
+    {
+      id:,
+      app_id:,
+      trip_id:,
+      stop_id:,
+      arrival_time:,
+      departure_time:,
+      stop_sequence:,
+      stop_headsign:,
+      pickup_type:,
+      drop_off_type:,
+      continuous_pickup:,
+      continuous_drop_off:,
+      shape_dist_traveled:,
+      timepoint:,
+      created_at:,
+      updated_at:
+    }
+  end
 end

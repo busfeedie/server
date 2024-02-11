@@ -63,4 +63,26 @@ RSpec.describe Api::TripsController, type: :controller do
       end
     end
   end
+
+  describe 'stops' do
+    let(:app) { create(:app) }
+    let(:trip) { create(:trip, app:) }
+    let!(:stop_times) { create_list(:stop_time, 3, app:, trip:) }
+    let(:params) { { id: trip.id } }
+    let(:user) { create(:user, app:) }
+
+    before do
+      login_user(user:)
+    end
+
+    let(:subject) do
+      get :stops, params:
+    end
+
+    it 'should return the stop times for the trip' do
+      subject
+      expect(response).to have_http_status(:success)
+      expect(response.body).to eq(stop_times.map(&:serialize).to_json)
+    end
+  end
 end
