@@ -6,6 +6,7 @@ task :import_from_csv, %i[csv_folder_name app_id file] => :environment do |_t, a
   require 'csv'
   app = ::App.find(args.app_id)
   path = "lib/data/#{args.csv_folder_name}/"
+  file = args.file
   Rails.logger.info("csv_folder_name: #{args.csv_folder_name}, app_id: #{args.app_id}, file: #{args.file}")
   ActiveRecord::Base.transaction do
     if file.blank? || file == 'agency'
