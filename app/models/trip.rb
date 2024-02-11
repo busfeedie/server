@@ -12,6 +12,7 @@ class Trip < ApplicationRecord
   belongs_to :route
   belongs_to :service, polymorphic: true
   belongs_to :shape, optional: true
+  has_many :stop_times, inverse_of: :trip
 
   validates :route, :service, :gtfs_trip_id, presence: true
   validates :shape, presence: true, if: proc { |trip| trip.route.any_continuous? }
@@ -34,7 +35,15 @@ class Trip < ApplicationRecord
       wheelchair_accessible:,
       bikes_allowed:,
       created_at:,
-      updated_at:
+      updated_at:,
+      first_stop_time: stop_times.first&.departure_time,
+      days: service.days,
+      today: service.on_date(date: Date.today)
     }
+  end
+
+  sig { params(date: Date).returns(T::Boolean) }
+  def runs_on_date(date:)
+    service.on_date(date:)
   end
 end

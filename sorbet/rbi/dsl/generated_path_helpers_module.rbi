@@ -18,6 +18,9 @@ module GeneratedPathHelpersModule
   def api_trips_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def api_vehicles_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def cancel_user_registration_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -28,6 +31,9 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def edit_user_registration_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def latest_api_positions_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_path(*args); end

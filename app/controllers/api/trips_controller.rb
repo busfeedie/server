@@ -10,8 +10,9 @@ module Api
 
     sig { returns(String) }
     def index
-      trips = ::Trip.where(app: @app)
+      trips = ::Trip.where(app: @app).includes(:service, :stop_times)
       trips = trips.where(route_id: params[:route_id]) if params[:route_id].present?
+      trips = trips.select { |trip| trip.runs_on_date(date: Date.parse(params[:date])) } if params[:date].present?
       render json: trips.map(&:serialize)
     end
   end

@@ -227,28 +227,28 @@ class Vehicle
 
   module EnumMethodsModule
     sig { void }
-    def accessible!; end
+    def wheelchair_access_accessible!; end
 
     sig { returns(T::Boolean) }
-    def accessible?; end
+    def wheelchair_access_accessible?; end
 
     sig { void }
-    def inaccessible!; end
+    def wheelchair_access_inaccessible!; end
 
     sig { returns(T::Boolean) }
-    def inaccessible?; end
+    def wheelchair_access_inaccessible?; end
 
     sig { void }
-    def no_value!; end
+    def wheelchair_access_no_value!; end
 
     sig { returns(T::Boolean) }
-    def no_value?; end
+    def wheelchair_access_no_value?; end
 
     sig { void }
-    def unknown!; end
+    def wheelchair_access_unknown!; end
 
     sig { returns(T::Boolean) }
-    def unknown?; end
+    def wheelchair_access_unknown?; end
   end
 
   module GeneratedAssociationMethods
@@ -286,9 +286,6 @@ class Vehicle
   end
 
   module GeneratedAssociationRelationMethods
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def accessible(*args, &blk); end
-
     sig { returns(PrivateAssociationRelation) }
     def all; end
 
@@ -330,9 +327,6 @@ class Vehicle
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def in_order_of(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def inaccessible(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def includes(*args, &blk); end
@@ -393,22 +387,19 @@ class Vehicle
     def merge(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def no_value(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def none(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def not_accessible(*args, &blk); end
+    def not_wheelchair_access_accessible(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def not_inaccessible(*args, &blk); end
+    def not_wheelchair_access_inaccessible(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def not_no_value(*args, &blk); end
+    def not_wheelchair_access_no_value(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def not_unknown(*args, &blk); end
+    def not_wheelchair_access_unknown(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def null_relation?(*args, &blk); end
@@ -465,9 +456,6 @@ class Vehicle
     def uniq!(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def unknown(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def unscope(*args, &blk); end
 
     sig do
@@ -487,6 +475,18 @@ class Vehicle
       ).returns(ActiveRecord::Result)
     end
     def upsert_all(attributes, returning: nil, unique_by: nil); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def wheelchair_access_accessible(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def wheelchair_access_inaccessible(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def wheelchair_access_no_value(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def wheelchair_access_unknown(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelationWhereChain) }
     def where(*args, &blk); end
@@ -971,9 +971,6 @@ class Vehicle
   end
 
   module GeneratedRelationMethods
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def accessible(*args, &blk); end
-
     sig { returns(PrivateRelation) }
     def all; end
 
@@ -1017,9 +1014,6 @@ class Vehicle
     def in_order_of(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def inaccessible(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def includes(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
@@ -1044,22 +1038,19 @@ class Vehicle
     def merge(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def no_value(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def none(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def not_accessible(*args, &blk); end
+    def not_wheelchair_access_accessible(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def not_inaccessible(*args, &blk); end
+    def not_wheelchair_access_inaccessible(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def not_no_value(*args, &blk); end
+    def not_wheelchair_access_no_value(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def not_unknown(*args, &blk); end
+    def not_wheelchair_access_unknown(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def null_relation?(*args, &blk); end
@@ -1116,10 +1107,19 @@ class Vehicle
     def uniq!(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def unknown(*args, &blk); end
+    def unscope(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def unscope(*args, &blk); end
+    def wheelchair_access_accessible(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def wheelchair_access_inaccessible(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def wheelchair_access_no_value(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def wheelchair_access_unknown(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelationWhereChain) }
     def where(*args, &blk); end
