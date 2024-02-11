@@ -143,10 +143,10 @@ task :import_from_csv, %i[csv_folder_name app_id file] => :environment do |_t, a
           departure_time: row['departure_time'],
           stop_sequence: row['stop_sequence'],
           stop_headsign: row['stop_headsign'],
-          pickup_type: row['pickup_type'].presence&.to_i,
-          drop_off_type: row['drop_off_type'].presence&.to_i,
-          continuous_pickup: row['continuous_pickup'].presence&.to_i,
-          continuous_drop_off: row['continuous_drop_off'].presence&.to_i,
+          pickup_type: row['pickup_type'].presence&.to_i || 0,
+          drop_off_type: row['drop_off_type'].presence&.to_i || 0,
+          continuous_pickup: row['continuous_pickup'].presence&.to_i || 1,
+          continuous_drop_off: row['continuous_drop_off'].presence&.to_i || 1,
           shape_dist_traveled: row['shape_dist_traveled'],
           timepoint: row['timepoint']
         )
