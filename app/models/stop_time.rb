@@ -39,6 +39,16 @@ class StopTime < ApplicationRecord
     }
   end
 
+  sig { returns(ActiveSupport::Duration) }
+  def arrival_time_as_duration
+    ActiveSupport::Duration.build(arrival_time)
+  end
+
+  sig { returns(ActiveSupport::Duration) }
+  def departure_time_as_duration
+    ActiveSupport::Duration.build(departure_time)
+  end
+
   sig { params(stop_time: String).returns(ActiveSupport::Duration) }
   def self.duration_from_time_string(stop_time)
     return ActiveSupport::Duration.build(0) if stop_time.blank? || stop_time.split(/:/).size < 2

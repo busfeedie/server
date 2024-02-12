@@ -95,4 +95,15 @@ RSpec.describe ::Trip, type: :model do
       expect(trip.serialize[:today]).to eq(trip.service.on_date(date: Date.today))
     end
   end
+  context 'position_today?' do
+    let(:trip) { create(:trip, app:) }
+    let!(:vehicle_position) { create(:vehicle_position, trip:, app:) }
+    it 'should return true if there is a vehicle position for today' do
+      expect(trip.position_today?).to eq(true)
+    end
+    it 'should return false if there is no vehicle position for today' do
+      vehicle_position.update(created_at: 2.days.ago)
+      expect(trip.position_today?).to eq(false)
+    end
+  end
 end

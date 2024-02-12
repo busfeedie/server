@@ -13,6 +13,7 @@ class Trip < ApplicationRecord
   belongs_to :service, polymorphic: true
   belongs_to :shape, optional: true
   has_many :stop_times, inverse_of: :trip
+  has_many :vehicle_positions, inverse_of: :trip
 
   validates :route, :service, :gtfs_trip_id, presence: true
   validates :shape, presence: true, if: proc { |trip| trip.route.any_continuous? }
@@ -36,9 +37,10 @@ class Trip < ApplicationRecord
       bikes_allowed:,
       created_at:,
       updated_at:,
-      first_stop_time: start_time,
+      first_stop_time: start_time&.to_i,
       days: service.days,
-      today: service.on_date(date: Date.today)
+      today: service.on_date(date: Date.today),
+      active: position_today?
     }
   end
 
@@ -47,8 +49,13 @@ class Trip < ApplicationRecord
     service.on_date(date:)
   end
 
-  sig { returns(T.nilable(ActiveSupport::TimeWithZone)) }
+  sig { returns(T.nilable(ActiveSupport::Duration)) }
   def start_time
-    stop_times.first&.departure_time
+    stop_times.first&.departure_time_as_duration
+  end
+
+  sig { returns(T::Boolean) }
+  def position_today?
+    vehicle_positions.where(created_at: Date.today.all_day).exists?
   end
 end

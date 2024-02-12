@@ -358,6 +358,20 @@ class Trip
 
     sig { params(value: T::Enumerable[::StopTime]).void }
     def stop_times=(value); end
+
+    sig { returns(T::Array[T.untyped]) }
+    def vehicle_position_ids; end
+
+    sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
+    def vehicle_position_ids=(ids); end
+
+    # This method is created by ActiveRecord on the `Trip` class because it declared `has_many :vehicle_positions`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
+    sig { returns(::VehiclePosition::PrivateCollectionProxy) }
+    def vehicle_positions; end
+
+    sig { params(value: T::Enumerable[::VehiclePosition]).void }
+    def vehicle_positions=(value); end
   end
 
   module GeneratedAssociationRelationMethods
