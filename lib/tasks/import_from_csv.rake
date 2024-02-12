@@ -48,7 +48,7 @@ task :import_from_csv, %i[csv_folder_name app_id file] => :environment do |_t, a
       CSV.foreach("#{path}calendar_dates.txt", headers: true) do |row|
         ::CalendarDate.create!(
           app:,
-          calendar: ::Calendar.find_by(gtfs_service_id: row['service_id']),
+          calendar: ::Calendar.find_by(gtfs_service_id: row['service_id'], app:),
           gtfs_service_id: row['service_id'],
           date: row['date'],
           exception_type: row['exception_type'].presence&.to_i
@@ -61,7 +61,7 @@ task :import_from_csv, %i[csv_folder_name app_id file] => :environment do |_t, a
         ::Route.create!(
           app:,
           gtfs_route_id: row['route_id'],
-          agency: ::Agency.find_by(gtfs_agency_id: row['agency_id']),
+          agency: ::Agency.find_by(gtfs_agency_id: row['agency_id'], app:),
           route_short_name: row['route_short_name'],
           route_long_name: row['route_long_name'],
           route_desc: row['route_desc'],
@@ -103,7 +103,7 @@ task :import_from_csv, %i[csv_folder_name app_id file] => :environment do |_t, a
           gtfs_zone_id: row['zone_id'],
           stop_url: row['stop_url'],
           location_type: row['location_type'],
-          parent_station: ::Stop.find_by(gtfs_stop_id: row['parent_station']),
+          parent_station: ::Stop.find_by(gtfs_stop_id: row['parent_station'], app:),
           stop_timezone: row['stop_timezone'],
           wheelchair_boarding: row['wheelchair_boarding'],
           gtfs_level_id: row['level_id'],
@@ -120,13 +120,16 @@ task :import_from_csv, %i[csv_folder_name app_id file] => :environment do |_t, a
         ::Trip.create!(
           app:,
           gtfs_trip_id: row['trip_id'],
-          route: ::Route.find_by(gtfs_route_id: row['route_id']),
-          service: ::Calendar.find_by(gtfs_service_id: row['service_id']) || ::CalendarDate.find_by(gtfs_service_id: row['service_id']),
+          route: ::Route.find_by(gtfs_route_id: row['route_id'], app:),
+          service: ::Calendar.find_by(gtfs_service_id: row['service_id'],
+                                      app:) || ::CalendarDate.find_by(
+                                        gtfs_service_id: row['service_id'], app:
+                                      ),
           trip_headsign: row['trip_headsign'],
           trip_short_name: row['trip_short_name'],
           direction: row['direction_id'].presence&.to_i,
           block_id: row['block_id'],
-          shape: ::Shape.find_by(gtfs_shape_id: row['shape_id']),
+          shape: ::Shape.find_by(gtfs_shape_id: row['shape_id'], app:),
           wheelchair_accessible: row['wheelchair_accessible'].presence&.to_i,
           bikes_allowed: row['bikes_allowed'].presence&.to_i
         )
@@ -137,8 +140,8 @@ task :import_from_csv, %i[csv_folder_name app_id file] => :environment do |_t, a
       CSV.foreach("#{path}stop_times.txt", headers: true) do |row|
         ::StopTime.create!(
           app:,
-          trip: ::Trip.find_by(gtfs_trip_id: row['trip_id']),
-          stop: ::Stop.find_by(gtfs_stop_id: row['stop_id']),
+          trip: ::Trip.find_by(gtfs_trip_id: row['trip_id'], app:),
+          stop: ::Stop.find_by(gtfs_stop_id: row['stop_id'], app:),
           arrival_time: ::StopTime.duration_from_time_string(row['arrival_time']).to_i,
           departure_time: ::StopTime.duration_from_time_string(row['departure_time']).to_i,
           stop_sequence: row['stop_sequence'].to_i,
