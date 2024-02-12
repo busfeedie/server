@@ -47,7 +47,7 @@ class Trip < ApplicationRecord
     service.on_date(date:)
   end
 
-  sig { returns(ActiveSupport::TimeWithZone) }
+  sig { returns(T.nilable(ActiveSupport::TimeWithZone)) }
   def start_time
     stop_times.first&.departure_time
   end

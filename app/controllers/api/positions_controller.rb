@@ -9,7 +9,7 @@ module Api
 
     sig { returns(String) }
     def create
-      p = geo_point(lon: params[:lon], lat: params[:lat])
+      p = geo_point(lon: params[:lon].to_s, lat: params[:lat].to_s)
       trip_identifier = create_trip_identifier if params[:trip].present?
       vehicle = ::Vehicle.find_by(app_id: T.must(@app).id, id: params[:vehicle_id])
       position = ::VehiclePosition.create!(
