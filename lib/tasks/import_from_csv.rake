@@ -79,7 +79,7 @@ task :import_from_csv, %i[csv_folder_name app_id file] => :environment do |_t, a
     if file.blank? || file == 'shapes'
       Rails.logger.info("Importing data from #{path}shapes.txt")
       CSV.foreach("#{path}shapes.txt", headers: true) do |row|
-        ::Shape.create!(
+        ::Shape.new(
           app:,
           gtfs_shape_id: row['shape_id'],
           shape_pt_sequence: row['shape_pt_sequence'],
@@ -93,7 +93,7 @@ task :import_from_csv, %i[csv_folder_name app_id file] => :environment do |_t, a
     if file.blank? || file == 'stops'
       Rails.logger.info("Importing data from #{path}stops.txt")
       CSV.foreach("#{path}stops.txt", headers: true) do |row|
-        ::Stop.create!(
+        ::Stop.new(
           app:,
           gtfs_stop_id: row['stop_id'],
           stop_code: row['stop_code'],
