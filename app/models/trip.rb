@@ -36,7 +36,7 @@ class Trip < ApplicationRecord
       bikes_allowed:,
       created_at:,
       updated_at:,
-      first_stop_time: stop_times.first&.departure_time,
+      first_stop_time: start_time,
       days: service.days,
       today: service.on_date(date: Date.today)
     }
@@ -45,5 +45,10 @@ class Trip < ApplicationRecord
   sig { params(date: Date).returns(T::Boolean) }
   def runs_on_date(date:)
     service.on_date(date:)
+  end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def start_time
+    stop_times.first&.departure_time
   end
 end

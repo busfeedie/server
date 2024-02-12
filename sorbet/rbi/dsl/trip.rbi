@@ -344,6 +344,20 @@ class Trip
 
     sig { params(value: T.nilable(::Shape)).void }
     def shape=(value); end
+
+    sig { returns(T::Array[T.untyped]) }
+    def stop_time_ids; end
+
+    sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
+    def stop_time_ids=(ids); end
+
+    # This method is created by ActiveRecord on the `Trip` class because it declared `has_many :stop_times`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
+    sig { returns(::StopTime::PrivateCollectionProxy) }
+    def stop_times; end
+
+    sig { params(value: T::Enumerable[::StopTime]).void }
+    def stop_times=(value); end
   end
 
   module GeneratedAssociationRelationMethods

@@ -12,7 +12,10 @@ module Api
     def index
       trips = ::Trip.where(app: @app).includes(:service, :stop_times)
       trips = trips.where(route_id: params[:route_id]) if params[:route_id].present?
-      trips = trips.select { |trip| trip.runs_on_date(date: Date.parse(params[:date])) } if params[:date].present?
+      if params[:date].present?
+        trips = trips.select { |trip| trip.runs_on_date(date: Date.parse(params[:date])) }
+        trips.sort_by { |trip| trip.service.start_date }
+      end
       render json: trips.map(&:serialize)
     end
 

@@ -719,16 +719,16 @@ class StopTime
     sig { void }
     def app_id_will_change!; end
 
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    sig { returns(::Integer) }
     def arrival_time; end
 
-    sig { params(value: T.nilable(::ActiveSupport::TimeWithZone)).returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    sig { params(value: ::Integer).returns(::Integer) }
     def arrival_time=(value); end
 
     sig { returns(T::Boolean) }
     def arrival_time?; end
 
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    sig { returns(T.nilable(::Integer)) }
     def arrival_time_before_last_save; end
 
     sig { returns(T.untyped) }
@@ -737,38 +737,28 @@ class StopTime
     sig { returns(T::Boolean) }
     def arrival_time_came_from_user?; end
 
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    sig { returns(T.nilable([::Integer, ::Integer])) }
     def arrival_time_change; end
 
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    sig { returns(T.nilable([::Integer, ::Integer])) }
     def arrival_time_change_to_be_saved; end
 
-    sig do
-      params(
-        from: T.nilable(::ActiveSupport::TimeWithZone),
-        to: T.nilable(::ActiveSupport::TimeWithZone)
-      ).returns(T::Boolean)
-    end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
     def arrival_time_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    sig { returns(T.nilable(::Integer)) }
     def arrival_time_in_database; end
 
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    sig { returns(T.nilable([::Integer, ::Integer])) }
     def arrival_time_previous_change; end
 
-    sig do
-      params(
-        from: T.nilable(::ActiveSupport::TimeWithZone),
-        to: T.nilable(::ActiveSupport::TimeWithZone)
-      ).returns(T::Boolean)
-    end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
     def arrival_time_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    sig { returns(T.nilable(::Integer)) }
     def arrival_time_previously_was; end
 
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    sig { returns(T.nilable(::Integer)) }
     def arrival_time_was; end
 
     sig { void }
@@ -929,16 +919,16 @@ class StopTime
     sig { void }
     def created_at_will_change!; end
 
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    sig { returns(::Integer) }
     def departure_time; end
 
-    sig { params(value: T.nilable(::ActiveSupport::TimeWithZone)).returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    sig { params(value: ::Integer).returns(::Integer) }
     def departure_time=(value); end
 
     sig { returns(T::Boolean) }
     def departure_time?; end
 
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    sig { returns(T.nilable(::Integer)) }
     def departure_time_before_last_save; end
 
     sig { returns(T.untyped) }
@@ -947,38 +937,28 @@ class StopTime
     sig { returns(T::Boolean) }
     def departure_time_came_from_user?; end
 
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    sig { returns(T.nilable([::Integer, ::Integer])) }
     def departure_time_change; end
 
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    sig { returns(T.nilable([::Integer, ::Integer])) }
     def departure_time_change_to_be_saved; end
 
-    sig do
-      params(
-        from: T.nilable(::ActiveSupport::TimeWithZone),
-        to: T.nilable(::ActiveSupport::TimeWithZone)
-      ).returns(T::Boolean)
-    end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
     def departure_time_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    sig { returns(T.nilable(::Integer)) }
     def departure_time_in_database; end
 
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    sig { returns(T.nilable([::Integer, ::Integer])) }
     def departure_time_previous_change; end
 
-    sig do
-      params(
-        from: T.nilable(::ActiveSupport::TimeWithZone),
-        to: T.nilable(::ActiveSupport::TimeWithZone)
-      ).returns(T::Boolean)
-    end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
     def departure_time_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    sig { returns(T.nilable(::Integer)) }
     def departure_time_previously_was; end
 
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    sig { returns(T.nilable(::Integer)) }
     def departure_time_was; end
 
     sig { void }
@@ -1241,7 +1221,7 @@ class StopTime
     sig { returns(T::Boolean) }
     def saved_change_to_app_id?; end
 
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    sig { returns(T.nilable([::Integer, ::Integer])) }
     def saved_change_to_arrival_time; end
 
     sig { returns(T::Boolean) }
@@ -1265,7 +1245,7 @@ class StopTime
     sig { returns(T::Boolean) }
     def saved_change_to_created_at?; end
 
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    sig { returns(T.nilable([::Integer, ::Integer])) }
     def saved_change_to_departure_time; end
 
     sig { returns(T::Boolean) }
