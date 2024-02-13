@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     resources :trips, only: %i[index] do
       member do
         get :stops
+        get :latest_position
       end
     end
     resources :vehicles, only: %i[create index]

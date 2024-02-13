@@ -85,4 +85,26 @@ RSpec.describe Api::TripsController, type: :controller do
       expect(response.body).to eq(stop_times.map(&:serialize).to_json)
     end
   end
+
+  describe 'latest_position' do
+    let(:app) { create(:app) }
+    let(:trip) { create(:trip, app:) }
+    let!(:vehicle_position) { create(:vehicle_position, app:, trip:) }
+    let(:params) { { id: trip.id } }
+    let(:user) { create(:user, app:) }
+
+    before do
+      login_user(user:)
+    end
+
+    let(:subject) do
+      get :latest_position, params:
+    end
+
+    it 'should return the latest vehicle position for the trip' do
+      subject
+      expect(response).to have_http_status(:success)
+      expect(response.body).to eq(vehicle_position.serialize.to_json)
+    end
+  end
 end

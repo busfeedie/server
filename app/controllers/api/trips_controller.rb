@@ -24,5 +24,12 @@ module Api
       trip = ::Trip.find(params[:id])
       render json: ::StopTime.where(app: @app, trip:).map(&:serialize)
     end
+
+    sig { returns(String) }
+    def latest_position
+      trip = ::Trip.find(params[:id])
+      position = trip.latest_position
+      render json: position&.serialize
+    end
   end
 end

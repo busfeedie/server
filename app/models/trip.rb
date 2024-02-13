@@ -58,4 +58,9 @@ class Trip < ApplicationRecord
   def position_today?
     vehicle_positions.where(created_at: Date.today.all_day).exists?
   end
+
+  sig { returns(T.nilable(VehiclePosition)) }
+  def latest_position
+    vehicle_positions.order(created_at: :desc).first
+  end
 end

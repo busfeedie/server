@@ -23,4 +23,27 @@ class VehiclePosition < ApplicationRecord
   enum :congestion_level, %i[unknown running_smoothly stop_and_go congestion sever_congestion]
 
   validates :lonlat, presence: true
+
+  sig { returns(T::Hash[Symbol, T.untyped]) }
+  # rubocop:disable Metrics/MethodLength
+  def serialize
+    {
+      id:,
+      lon: lonlat.x,
+      lat: lonlat.y,
+      bearing:,
+      odometer:,
+      speed:,
+      vehicle_stop_status:,
+      measured_at:,
+      congestion_level:,
+      occupancy_percentage:,
+      trip_identifier_id:,
+      created_at:,
+      updated_at:,
+      trip_id:,
+      app_id:,
+      vehicle_id:
+    }
+  end
 end
