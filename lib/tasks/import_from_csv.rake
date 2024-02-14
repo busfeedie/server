@@ -79,8 +79,10 @@ task :import_from_csv, %i[csv_folder_name app_id file] => :environment do |_t, a
     if file.blank? || file == 'shapes'
       Rails.logger.info("Importing data from #{path}shapes.txt")
       CSV.foreach("#{path}shapes.txt", headers: true) do |row|
-        ::Shape.new(
+        shape = ::Shape.find_or_create_by(gtfs_shape_id: row['shape_id'], app:)
+        ::ShapePoint.new(
           app:,
+          shape:,
           gtfs_shape_id: row['shape_id'],
           shape_pt_sequence: row['shape_pt_sequence'],
           shape_dist_traveled: row['shape_dist_traveled']

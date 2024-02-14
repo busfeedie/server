@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_11_203444) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_14_005411) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -95,11 +95,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_11_203444) do
     t.index ["app_id"], name: "index_routes_on_app_id"
   end
 
-  create_table "shapes", force: :cascade do |t|
-    t.string "gtfs_shape_id", null: false
+  create_table "shape_points", force: :cascade do |t|
+    t.bigint "shape_id", null: false
     t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}, null: false
     t.integer "shape_pt_sequence", null: false
     t.float "shape_dist_traveled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shape_id"], name: "index_shape_points_on_shape_id"
+  end
+
+  create_table "shapes", force: :cascade do |t|
+    t.string "gtfs_shape_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "app_id", null: false
@@ -227,6 +234,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_11_203444) do
   end
 
   add_foreign_key "calendar_dates", "calendars"
+  add_foreign_key "shape_points", "shapes"
   add_foreign_key "stop_times", "stops"
   add_foreign_key "stop_times", "trips"
   add_foreign_key "stops", "stops", column: "parent_station_id"
