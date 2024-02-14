@@ -17,6 +17,7 @@ module Api
         trip_identifier:,
         app: @app,
         trip: trip_identifier&.trip,
+        measured_at: params[:measured_at],
         vehicle:
       )
       render json: position
