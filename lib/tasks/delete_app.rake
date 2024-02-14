@@ -22,11 +22,11 @@ task :delete_app, %i[app_id] => :environment do |_t, args|
     Rails.logger.info('Deleting routes')
     app.routes.destroy_all
 
-    Rails.logger.info('Deleting stops')
-    app.stops.destroy_all
-
     Rails.logger.info('Deleting stop_times')
     app.stop_times.destroy_all
+
+    Rails.logger.info('Deleting stops')
+    app.stops.destroy_all
 
     Rails.logger.info('Deleting trips')
     app.trips.destroy_all
