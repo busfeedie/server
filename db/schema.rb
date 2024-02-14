@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_14_005411) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_14_012231) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -102,6 +102,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_005411) do
     t.float "shape_dist_traveled"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "app_id", null: false
+    t.index ["app_id"], name: "index_shape_points_on_app_id"
     t.index ["shape_id"], name: "index_shape_points_on_shape_id"
   end
 
