@@ -17,18 +17,18 @@ task :delete_app, %i[app_id] => :environment do |_t, args|
     app.calendar_dates.destroy_all
     Rails.logger.info('Deleting routes')
     app.routes.destroy_all
-    Rails.logger.info('Deleting trips')
-    app.trips.destroy_all
-    Rails.logger.info('Deleting shapes')
-    app.shapes.destroy_all
     Rails.logger.info('Deleting stops')
     app.stops.destroy_all
     Rails.logger.info('Deleting stop_times')
     app.stop_times.destroy_all
-    Rails.logger.info('Deleting trip_identifiers')
-    app.trip_identifiers.destroy_all
+    Rails.logger.info('Deleting trips')
+    app.trips.destroy_all
+    Rails.logger.info('Deleting shapes')
+    app.shapes.destroy_all
     Rails.logger.info('Deleting vehicle_positions')
     app.vehicle_positions.destroy_all
+    Rails.logger.info('Deleting trip_identifiers')
+    app.trip_identifiers.destroy_all
     Rails.logger.info('Deleting vehicles')
     app.vehicles.destroy_all
     Rails.logger.info('Deleting app')
