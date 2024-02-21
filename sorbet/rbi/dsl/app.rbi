@@ -361,6 +361,12 @@ class App
     def users=(value); end
 
     sig { returns(T::Array[T.untyped]) }
+    def vehicle_ids; end
+
+    sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
+    def vehicle_ids=(ids); end
+
+    sig { returns(T::Array[T.untyped]) }
     def vehicle_position_ids; end
 
     sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
@@ -373,6 +379,14 @@ class App
 
     sig { params(value: T::Enumerable[::VehiclePosition]).void }
     def vehicle_positions=(value); end
+
+    # This method is created by ActiveRecord on the `App` class because it declared `has_many :vehicles`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
+    sig { returns(::Vehicle::PrivateCollectionProxy) }
+    def vehicles; end
+
+    sig { params(value: T::Enumerable[::Vehicle]).void }
+    def vehicles=(value); end
   end
 
   module GeneratedAssociationRelationMethods

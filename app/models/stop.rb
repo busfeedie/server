@@ -16,4 +16,29 @@ class Stop < ApplicationRecord
   validates :stop_name, :lonlat, presence: true, if: proc { |stop|
                                                        %i[generic_node boarding_area].include? stop.location_type
                                                      }
+
+  sig { returns(T::Hash[Symbol, T.untyped]) }
+  def serialize
+    {
+      id:,
+      app_id:,
+      gtfs_stop_id:,
+      stop_code:,
+      stop_name:,
+      tts_stop_name:,
+      stop_desc:,
+      lon:,
+      lat:,
+      gtfs_zone_id:,
+      stop_url:,
+      location_type:,
+      parent_station_id:,
+      stop_timezone:,
+      wheelchair_boarding:,
+      gtfs_level_id:,
+      platform_code:,
+      created_at:,
+      updated_at:
+    }
+  end
 end

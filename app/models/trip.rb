@@ -19,7 +19,6 @@ class Trip < ApplicationRecord
   validates :shape, presence: true, if: proc { |trip| trip.route.any_continuous? }
 
   sig { returns(T::Hash[Symbol, T.untyped]) }
-  # rubocop:disable Metrics/MethodLength
   def serialize
     {
       id:,
@@ -38,6 +37,7 @@ class Trip < ApplicationRecord
       created_at:,
       updated_at:,
       first_stop_time: start_time&.to_i,
+      first_stop: stop_times.first&.serialize,
       days: service.days,
       today: service.on_date(date: Date.today),
       active: position_today?

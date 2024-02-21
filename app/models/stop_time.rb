@@ -17,7 +17,6 @@ class StopTime < ApplicationRecord
   validates :arrival_time, :departure_time, presence: true, if: proc { |stop_time| stop_time.timepoint }
 
   sig { returns(T::Hash[Symbol, T.untyped]) }
-  # rubocop:disable Metrics/MethodLength
   def serialize
     {
       id:,
@@ -35,7 +34,8 @@ class StopTime < ApplicationRecord
       shape_dist_traveled:,
       timepoint:,
       created_at:,
-      updated_at:
+      updated_at:,
+      stop: stop&.serialize
     }
   end
 
