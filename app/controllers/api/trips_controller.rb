@@ -14,7 +14,7 @@ module Api
       trips = trips.where(route_id: params[:route_id]) if params[:route_id].present?
       if params[:date].present?
         trips = trips.select { |trip| trip.runs_on_date(date: Date.parse(params[:date])) }
-        trips = trips.sort_by { |trip| trip.service.start_date }
+        trips = trips.sort_by { |trip| trip.start_time.to_i }
       end
       render json: trips.map(&:serialize)
     end
