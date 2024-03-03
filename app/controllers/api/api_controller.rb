@@ -15,6 +15,9 @@ module Api
     def load_app
       @app = current_user.app
       redirect_to user_session_path if @app.blank?
+      current_span = OpenTelemetry::Trace.current_span
+      current_span.set_attribute("user.id", current_user.id)
+      current_span.set_attribute("app.id", @app.id)
       @app
     end
 
