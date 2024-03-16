@@ -63,4 +63,7 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+  config.credentials.content_path = Rails.root.join('config/credentials/development.yml.enc')
+  config.credentials.key_path = Rails.root.join('config/credentials/development.key')
 end
