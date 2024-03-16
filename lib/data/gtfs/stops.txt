@@ -1,0 +1,4 @@
+stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,zone_id,stop_url,location_type,parent_station
+853000142,11262,Clonmany,,55.2634881223568,-7.41347263603761,,,,
+853000020,,St Patrick's Street,,55.087741636507,-7.69832155033826,,,,
+8530PB000300,601221,Lough Na Glack,Bus,53.9709988711604,-6.70193802794857,,,,

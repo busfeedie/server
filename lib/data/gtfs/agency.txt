@@ -1,0 +1,3 @@
+agency_id,agency_name,agency_url,agency_timezone
+7778198,Mc Ginley Coach Travel,http://www.johnmcginley.com/,Europe/London
+7778048,Kearns Transport,https://kearnstransport.com/,Europe/London

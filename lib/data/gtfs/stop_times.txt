@@ -1,0 +1,4 @@
+trip_id,arrival_time,departure_time,stop_id,stop_sequence,stop_headsign,pickup_type,drop_off_type,timepoint
+3290_1,04:30:00,04:30:00,853000142,1,"O'Connell Street, Dublin City",0,1,1
+3290_1,04:40:00,04:40:00,853000020,2,,0,0,1
+3290_1,04:55:00,04:55:00,8530PB000300,3,,0,0,1

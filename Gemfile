@@ -69,6 +69,8 @@ group :development, :test do
   gem 'rspec-rails'
 
   gem 'tapioca', require: false
+
+  gem 'pry'
 end
 
 group :development do
@@ -80,8 +82,6 @@ group :development do
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
-
-  gem 'pry'
 
   gem 'rubocop', require: false
   gem 'rubocop-sorbet', require: false

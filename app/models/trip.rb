@@ -16,7 +16,7 @@ class Trip < ApplicationRecord
   has_many :vehicle_positions, inverse_of: :trip
 
   validates :route, :service, :gtfs_trip_id, presence: true
-  validates :shape, presence: true, if: proc { |trip| trip.route.any_continuous? }
+  validates :shape, presence: true, if: proc { |trip| trip.route&.any_continuous? }
 
   sig { returns(T::Hash[Symbol, T.untyped]) }
   def serialize

@@ -9,6 +9,9 @@ require 'rspec/rails'
 require 'devise'
 require 'support/factory_bot'
 require 'support/controller_macros'
+require 'rake'
+
+Rails.application.load_tasks
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are

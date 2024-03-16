@@ -8,12 +8,15 @@ task :import_from_csv, %i[csv_folder_name app_id file agency_id] => :environment
   path = "lib/data/#{args.csv_folder_name}/"
   file = args.file
   gtfs_agency_id = args.agency_id
-  Rails.logger.info("csv_folder_name: #{args.csv_folder_name}, app_id: #{args.app_id}, file: #{args.file}, agency_id: #{args.agency_id}")
+  Rails.logger.info(
+    "csv_folder_name: #{args.csv_folder_name}, app_id: #{args.app_id}, file: #{args.file}, agency_id: #{args.agency_id}"
+  )
   ActiveRecord::Base.transaction do
     if file.blank? || file == 'agency'
       Rails.logger.info("Importing data from #{path}agency.txt")
       CSV.foreach("#{path}agency.txt", headers: true) do |row|
         next if gtfs_agency_id.present? && row['agency_id'] != gtfs_agency_id
+
         ::Agency.create!(
           app:,
           gtfs_agency_id: row['agency_id'],
@@ -32,6 +35,7 @@ task :import_from_csv, %i[csv_folder_name app_id file agency_id] => :environment
       Rails.logger.info("Importing data from #{path}routes.txt")
       CSV.foreach("#{path}routes.txt", headers: true) do |row|
         next if gtfs_agency_id.present? && row['agency_id'] != gtfs_agency_id
+
         gtfs_route_ids << row['route_id']
         ::Route.create!(
           app:,
@@ -59,7 +63,8 @@ task :import_from_csv, %i[csv_folder_name app_id file agency_id] => :environment
       trips = [].to_set
       CSV.foreach("#{path}trips.txt", headers: true) do |row|
         next if gtfs_agency_id.present? && !gtfs_route_ids.include?(row['route_id'])
-        trip = ::Trip.new!(
+
+        trip = ::Trip.new(
           app:,
           gtfs_trip_id: row['trip_id'],
           route: ::Route.find_by(gtfs_route_id: row['route_id'], app:),
@@ -76,6 +81,7 @@ task :import_from_csv, %i[csv_folder_name app_id file agency_id] => :environment
           bikes_allowed: row['bikes_allowed'].presence&.to_i
         )
         trips << trip
+        trip_id_to_trip[row['trip_id']] = trip
         service_to_trip[row['service_id']] ||= []
         service_to_trip[row['service_id']] << trip
         shape_to_trip[row['shape_id']] ||= []
@@ -86,6 +92,7 @@ task :import_from_csv, %i[csv_folder_name app_id file agency_id] => :environment
       Rails.logger.info("Importing data from #{path}calendar.txt")
       CSV.foreach("#{path}calendar.txt", headers: true) do |row|
         next if gtfs_agency_id.present? && service_to_trip[row['service_id']].blank?
+
         calendar = ::Calendar.create!(
           app:,
           gtfs_service_id: row['service_id'],
@@ -99,8 +106,10 @@ task :import_from_csv, %i[csv_folder_name app_id file agency_id] => :environment
           start_date: row['start_date'],
           end_date: row['end_date']
         )
-        service_to_trip[row['service_id']]&.each do |trip|
-          trip.service = calendar
+        if service_to_trip.present?
+          service_to_trip[row['service_id']]&.each do |trip|
+            trip.service = calendar
+          end
         end
       end
     end
@@ -108,6 +117,7 @@ task :import_from_csv, %i[csv_folder_name app_id file agency_id] => :environment
       Rails.logger.info("Importing data from #{path}calendar_dates.txt")
       CSV.foreach("#{path}calendar_dates.txt", headers: true) do |row|
         next if gtfs_agency_id.present? && service_to_trip[row['service_id']].blank?
+
         calendar_date = ::CalendarDate.create!(
           app:,
           calendar: ::Calendar.find_by(gtfs_service_id: row['service_id'], app:),
@@ -123,12 +133,12 @@ task :import_from_csv, %i[csv_folder_name app_id file agency_id] => :environment
       shapes = {}
       CSV.foreach("#{path}shapes.txt", headers: true) do |row|
         next if gtfs_agency_id.present? && shape_to_trip[row['shape_id']].blank?
+
         if shapes[row['shape_id']].present?
           shape = shapes[row['shape_id']]
         else
           shape = ::Shape.find_or_create_by(gtfs_shape_id: row['shape_id'], app:)
           shapes[row['shape_id']] = shape
-          shape_to_trip[row['shape_id']]&.shape = shape
         end
         ::ShapePoint.new(
           app:,
@@ -139,25 +149,26 @@ task :import_from_csv, %i[csv_folder_name app_id file agency_id] => :environment
           lon: row['shape_pt_lon'],
           lat: row['shape_pt_lat']
         ).save!
-        shape_to_trip[row['shape_id']]&.each do |trip|
-          trip.shape = shape
+        if shape_to_trip.present? && shape_to_trip[row['shape_id']].present?
+          shape_to_trip[row['shape_id']]&.each do |trip|
+            trip.shape = shape
+          end
         end
       end
     end
-    if file.blank? || file == 'trips'
-      trips.each do |trip|
-        trip.save!
-      end
-    end
+
+    trips.each(&:save!) if file.blank? || file == 'trips'
+
     if file.blank? || file == 'stop_times'
       Rails.logger.info("Importing data from #{path}stop_times.txt")
       trip_id_to_trip = ::Trip.where(app:).group_by(&:gtfs_trip_id) if gtfs_agency_id.blank?
       stop_to_stop_times = {}
       CSV.foreach("#{path}stop_times.txt", headers: true) do |row|
         next if gtfs_agency_id.present? && trip_id_to_trip[row['trip_id']].blank?
+
         stop_time = ::StopTime.new(
           app:,
-          trip: trip_id_to_trip[row['trip_id']],
+          trip: trip_id_to_trip[row['trip_id']][0],
           stop: ::Stop.find_by(gtfs_stop_id: row['stop_id'], app:),
           arrival_time: ::StopTime.duration_from_time_string(row['arrival_time']).to_i,
           departure_time: ::StopTime.duration_from_time_string(row['departure_time']).to_i,
@@ -178,6 +189,7 @@ task :import_from_csv, %i[csv_folder_name app_id file agency_id] => :environment
       Rails.logger.info("Importing data from #{path}stops.txt")
       CSV.foreach("#{path}stops.txt", headers: true) do |row|
         next if gtfs_agency_id.present? && stop_to_stop_times[row['stop_id']].blank?
+
         stop = ::Stop.new(
           app:,
           gtfs_stop_id: row['stop_id'],
@@ -197,16 +209,16 @@ task :import_from_csv, %i[csv_folder_name app_id file agency_id] => :environment
           lon: row['stop_lon'],
           lat: row['stop_lat']
         ).save!
-        stop_to_stop_times[row['stop_id']].each do |stop_time|
-          stop_time.stop = stop
+        if stop_to_stop_times.present?
+          stop_to_stop_times[row['stop_id']]&.each do |stop_time|
+            stop_time.stop = stop
+          end
         end
       end
     end
     if file.blank? || file == 'stop_times'
-      stop_to_stop_times.each do |stop_id, stop_times|
-        stop_times.each do |stop_time|
-          stop_time.save!
-        end
+      stop_to_stop_times.each do |_stop_id, stop_times|
+        stop_times.each(&:save!)
       end
     end
   end
