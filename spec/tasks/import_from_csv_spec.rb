@@ -231,4 +231,48 @@ RSpec.describe 'rake import_from_csv' do
       end
     end
   end
+
+  describe 'importing a single agency from a multi-agency file' do
+    let(:gtfs_agency_id) { '7778048' }
+    let(:csv_folder_name) { 'multi_agency' }
+    let(:import_from_file) { subject.invoke(csv_folder_name, app_id, '', gtfs_agency_id) }
+    let(:run_file) do
+      subject.reenable
+      import_from_file
+    end
+
+    it 'imports data only for this agency' do
+      run_file
+      expect(Agency.count).to eq(1)
+      agency = Agency.first
+      expect(agency.app).to eq(app)
+      expect(agency.gtfs_agency_id).to eq('7778048')
+      expect(agency.agency_name).to eq('Kearns Transport')
+      expect(Route.count).to eq(1)
+      route = Route.first
+      expect(route.agency).to eq(agency)
+      expect(route.route_short_name).to eq('101')
+      expect(Trip.count).to eq(1)
+      trip = Trip.first
+      expect(trip.route).to eq(route)
+      expect(trip.gtfs_trip_id).to eq('12')
+      expect(Stop.count).to eq(1)
+      stop = Stop.first
+      expect(stop.gtfs_stop_id).to eq('8530PB000300')
+      expect(StopTime.count).to eq(1)
+      stop_time = StopTime.first
+      expect(stop_time.stop).to eq(stop)
+      expect(stop_time.trip).to eq(trip)
+      expect(Shape.count).to eq(1)
+      shape = Shape.first
+      expect(shape.gtfs_shape_id).to eq('7')
+      expect(shape.shape_points.count).to eq(2)
+      expect(ShapePoint.count).to eq(2)
+      expect(trip.shape).to eq(shape)
+      expect(Calendar.count).to eq(1)
+      calendar = Calendar.first
+      expect(calendar.gtfs_service_id).to eq('9')
+      expect(trip.service).to eq(calendar)
+    end
+  end
 end

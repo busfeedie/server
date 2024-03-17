@@ -81,7 +81,7 @@ task :import_from_csv, %i[csv_folder_name app_id file agency_id] => :environment
           bikes_allowed: row['bikes_allowed'].presence&.to_i
         )
         trips << trip
-        trip_id_to_trip[row['trip_id']] = trip
+        trip_id_to_trip[row['trip_id']] = [trip]
         service_to_trip[row['service_id']] ||= []
         service_to_trip[row['service_id']] << trip
         shape_to_trip[row['shape_id']] ||= []
@@ -168,7 +168,7 @@ task :import_from_csv, %i[csv_folder_name app_id file agency_id] => :environment
 
         stop_time = ::StopTime.new(
           app:,
-          trip: trip_id_to_trip[row['trip_id']][0],
+          trip: trip_id_to_trip[row['trip_id']].first,
           stop: ::Stop.find_by(gtfs_stop_id: row['stop_id'], app:),
           arrival_time: ::StopTime.duration_from_time_string(row['arrival_time']).to_i,
           departure_time: ::StopTime.duration_from_time_string(row['departure_time']).to_i,
@@ -205,7 +205,8 @@ task :import_from_csv, %i[csv_folder_name app_id file agency_id] => :environment
           wheelchair_boarding: row['wheelchair_boarding'],
           gtfs_level_id: row['level_id'],
           platform_code: row['platform_code']
-        ).set_lon_lat(
+        )
+        stop.set_lon_lat(
           lon: row['stop_lon'],
           lat: row['stop_lat']
         ).save!
