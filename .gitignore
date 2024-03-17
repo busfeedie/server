@@ -31,6 +31,10 @@
 
 /public/assets
 
+# ignore data files used for specific providers
+/lib/data/mcginley/*
+/lib/data/kearns/*
+
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
