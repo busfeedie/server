@@ -19,9 +19,9 @@ jobs:
         ports:
           - "5433:5433"
         env:
-          POSTGRES_DB: rails_test
-          POSTGRES_USER: rails
-          POSTGRES_PASSWORD: password
+          POSTGRES_DB: server_test
+          POSTGRES_USER: diarmuid
+          POSTGRES_PASSWORD: busfeedie
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgis://rails:password@localhost:5433/rails_test"
