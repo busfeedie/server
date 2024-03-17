@@ -24,7 +24,7 @@ jobs:
           POSTGRES_PASSWORD: busfeedie
     env:
       RAILS_ENV: test
-      DATABASE_URL: "postgis://rails:password@localhost:5433/rails_test"
+      DATABASE_URL: "postgis://diarmuid:busfeedie@localhost:5433/server_test"
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
     steps:
       - name: Checkout code
