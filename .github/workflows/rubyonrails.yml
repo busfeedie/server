@@ -19,12 +19,13 @@ jobs:
         ports:
           - "5433:5433"
         env:
+          DB_HOST: localhost
           POSTGRES_DB: server_test
           POSTGRES_USER: diarmuid
           POSTGRES_PASSWORD: busfeedie
     env:
       RAILS_ENV: test
-      DATABASE_URL: "postgis://diarmuid:busfeedie@localhost:5433/server_test"
+      DATABASE_URL: "postgis://diarmuid:busfeedie@localhost/server_test"
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
     steps:
       - name: Checkout code
