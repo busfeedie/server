@@ -17,4 +17,9 @@ class User < ApplicationRecord
   def set_app
     self.app ||= App.create!(name: "#{email}'s app")
   end
+
+  sig { returns(T::Boolean) }
+  def admin?
+    email == 'diarmuid@busfeed.ie'
+  end
 end

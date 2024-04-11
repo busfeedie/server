@@ -1,0 +1,18 @@
+<table class="table-auto">
+    <thead>
+        <tr>
+            <th>App ID</th>
+            <th>Created At</th>
+            <th>Last Updated At</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @apps.each do |app| %>
+        <tr>
+            <td><%= app.id %></td>
+            <td><%= app.created_at %></td>
+            <td><%= app.updated_at %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
