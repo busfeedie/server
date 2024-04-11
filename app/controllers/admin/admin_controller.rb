@@ -5,7 +5,7 @@ module Admin
   # This is the parent class of all other public api controllers
   class AdminController < ActionController::Base
     extend ::T::Sig
-
+    layout 'admin'
     before_action :authenticate_user!
 
     sig { void }

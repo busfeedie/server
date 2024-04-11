@@ -9,7 +9,7 @@
     <tbody>
     <% @apps.each do |app| %>
         <tr>
-            <td><%= app.id %></td>
+            <td><%= link_to( app.id, admin_app_path(app)) %></td>
             <td><%= app.created_at %></td>
             <td><%= app.updated_at %></td>
         </tr>

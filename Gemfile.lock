@@ -137,6 +137,7 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     google-protobuf (3.25.3-x86_64-darwin)
+    google-protobuf (3.25.3-x86_64-linux)
     googleapis-common-protos-types (1.13.0)
       google-protobuf (~> 3.18)
     gtfs-realtime-bindings (0.0.5)
@@ -536,6 +537,10 @@ GEM
     stringio (3.0.9)
     syntax_tree (6.2.0)
       prettier_print (>= 1.2.0)
+    tailwindcss-rails (2.4.0-x86_64-darwin)
+      railties (>= 6.0.0)
+    tailwindcss-rails (2.4.0-x86_64-linux)
+      railties (>= 6.0.0)
     tapioca (0.11.12)
       bundler (>= 2.2.25)
       netrc (>= 0.11.0)
@@ -617,6 +622,7 @@ DEPENDENCIES
   spring
   sprockets-rails
   stimulus-rails
+  tailwindcss-rails (~> 2.4)
   tapioca
   turbo-rails
   tzinfo-data
