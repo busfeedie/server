@@ -1,17 +1,19 @@
 <table class="table-auto min-w-full text-left border border-gray-300">
     <thead class="font-medium text-gray-500 uppercase tracking-wider border-b">
         <tr>
-            <th>App ID</th>
+            <th>ID</th>
+            <th>Email</th>
             <th>Created At</th>
             <th>Last Updated At</th>
         </tr>
     </thead>
     <tbody>
-    <% @apps.each do |app| %>
+    <% @users.each do |user| %>
         <tr class = "border-b">
-            <td><%= link_to( app.id, admin_app_path(app)) %></td>
-            <td><%= app.created_at %></td>
-            <td><%= app.updated_at %></td>
+            <td><%= user.id %></td>
+            <td><%= user.email %></td>
+            <td><%= user.created_at %></td>
+            <td><%= user.updated_at %></td>
         </tr>
     <% end %>
     </tbody>

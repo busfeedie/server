@@ -9,7 +9,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :apps, only: %i[index show] do
-      resources :users, only: %i[index]
+      scope module: :apps do
+        resources :users, only: %i[index]
+      end
     end
     devise_for :users
   end
