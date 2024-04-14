@@ -1,5 +1,5 @@
 <table class="table-auto min-w-full text-left border border-gray-300">
-    <thead class="font-medium text-gray-500 uppercase tracking-wider border-b">
+    <thead class="font-medium text-gray-500 uppercase tracking-wider border-b divide-x divide-dashed">
         <tr>
             <th>ID</th>
             <th>GTFS ID</th>
@@ -16,7 +16,7 @@
     </thead>
     <tbody>
     <% @trips.each do |trip| %>
-        <tr class = "border-b">
+        <tr class = "border-b divide-x divide-dashed">
             <td><%= link_to( trip.id, admin_app_trip_path(@app,trip)) %></td>
             <td><%= trip.gtfs_trip_id %></td>
             <td><%= trip.trip_headsign %></td>

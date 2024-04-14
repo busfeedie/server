@@ -1,5 +1,5 @@
 <table class="table-auto min-w-full text-left border border-gray-300">
-    <thead class="font-medium text-gray-500 uppercase tracking-wider border-b">
+    <thead class="font-medium text-gray-500 uppercase tracking-wider border-b divide-x divide-dashed">
         <tr>
             <th>App ID</th>
             <th>Created At</th>
@@ -8,7 +8,7 @@
     </thead>
     <tbody>
     <% @apps.each do |app| %>
-        <tr class = "border-b">
+        <tr class = "border-b divide-x divide-dashed">
             <td><%= link_to( app.id, admin_app_path(app)) %></td>
             <td><%= app.created_at %></td>
             <td><%= app.updated_at %></td>

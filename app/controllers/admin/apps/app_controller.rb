@@ -6,6 +6,7 @@ module Admin
     # This controller is used to list the available trips
     class AppController < Admin::AdminController
       extend ::T::Sig
+      layout 'admin/app'
 
       before_action :load_app
 

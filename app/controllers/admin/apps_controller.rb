@@ -16,6 +16,7 @@ module Admin
       @app = T.let(App.find_by(id: params[:id]), T.nilable(App))
       redirect_to action: 'index' unless @app
       flash.alert = 'App not found' unless @app
+      render layout: 'admin/app'
     end
   end
 end

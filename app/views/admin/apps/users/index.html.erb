@@ -1,5 +1,5 @@
 <table class="table-auto min-w-full text-left border border-gray-300">
-    <thead class="font-medium text-gray-500 uppercase tracking-wider border-b">
+    <thead class="font-medium text-gray-500 uppercase tracking-wider border-b divide-x divide-dashed">
         <tr>
             <th>ID</th>
             <th>Email</th>
@@ -9,7 +9,7 @@
     </thead>
     <tbody>
     <% @users.each do |user| %>
-        <tr class = "border-b">
+        <tr class = "border-b divide-x divide-dashed">
             <td><%= user.id %></td>
             <td><%= user.email %></td>
             <td><%= user.created_at %></td>

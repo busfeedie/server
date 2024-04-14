@@ -33,7 +33,7 @@
 
 <h1>Positions:</h1>
 <table class="table-auto min-w-full text-left border border-gray-300">
-    <thead class="font-medium text-gray-500 uppercase tracking-wider border-b">
+    <thead class="font-medium text-gray-500 uppercase tracking-wider border-b divide-x divide-dashed">
         <tr>
             <th>ID</th>
             <th>lon</th>
@@ -51,7 +51,7 @@
     </thead>
     <tbody>
         <% @latest_positions.each do |position| %>
-        <tr class = "border-b">
+        <tr class = "border-b divide-x divide-dashed">
             <td><%= position.id %></td>
             <td><%= position.lon %></td>
             <td><%= position.lat %></td>
@@ -62,8 +62,8 @@
             <td><%= position.measured_at %></td>
             <td><%= position.congestion_level %></td>
             <td><%= position.trip_identifier_id %></td>
-            <td><%= @trip.created_at %></td>
-            <td><%= @trip.updated_at %></td>
+            <td><%= position.created_at %></td>
+            <td><%= position.updated_at %></td>
         </tr>
     <% end %>
     </tbody>
