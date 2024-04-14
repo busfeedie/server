@@ -1,0 +1,34 @@
+<table class="table-auto min-w-full text-left border border-gray-300">
+    <thead class="font-medium text-gray-500 uppercase tracking-wider border-b">
+        <tr>
+            <th>ID</th>
+            <th>GTFS ID</th>
+            <th>Headsign</th>
+            <th>Short Name</th>
+            <th>Direction</th>
+            <th>Block Id</th>
+            <th>Wheelchair</th>
+            <th>Bikes</th>
+            <th>Route ID</th>
+            <th>Created At</th>
+            <th>Last Updated At</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @trips.each do |trip| %>
+        <tr class = "border-b">
+            <td><%= link_to( trip.id, admin_app_trip_path(@app,trip)) %></td>
+            <td><%= trip.gtfs_trip_id %></td>
+            <td><%= trip.trip_headsign %></td>
+            <td><%= trip.trip_short_name %></td>
+            <td><%= trip.direction %></td>
+            <td><%= trip.block_id %></td>
+            <td><%= trip.wheelchair_accessible %></td>
+            <td><%= trip.bikes_allowed %></td>
+            <td><%= trip.route_id %></td>
+            <td><%= trip.created_at %></td>
+            <td><%= trip.updated_at %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
