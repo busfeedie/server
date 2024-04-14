@@ -18,5 +18,15 @@ module Admin
       flash.alert = 'App not found' unless @app
       render layout: 'admin/app'
     end
+
+    sig { void }
+    def create
+      @app = T.let(App.create!, T.nilable(App))
+      redirect_to action: 'show', id: @app.id if @app
+      return if @app
+
+      flash.alert = 'App not found'
+      redirect_to action: 'index'
+    end
   end
 end

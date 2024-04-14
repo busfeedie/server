@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   namespace :admin do
-    resources :apps, only: %i[index show] do
+    resources :apps, only: %i[index show create] do
       scope module: :apps do
         resources :trips, only: %i[index show]
         resources :users, only: %i[index]
