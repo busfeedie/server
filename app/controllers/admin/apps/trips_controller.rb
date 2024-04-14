@@ -15,6 +15,8 @@ module Admin
       sig { void }
       def show
         @trip = T.let(Trip.find_by(app: @app, id: params[:id]), T.nilable(Trip))
+        @latest_positions = T.let(@trip&.vehicle_positions&.order(created_at: :desc)&.limit(50).to_a,
+                                  T.nilable(T::Array[VehiclePosition]))
       end
     end
   end

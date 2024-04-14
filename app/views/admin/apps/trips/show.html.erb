@@ -30,3 +30,41 @@
         </tr>
     </tbody>
 </table>
+
+<h1>Positions:</h1>
+<table class="table-auto min-w-full text-left border border-gray-300">
+    <thead class="font-medium text-gray-500 uppercase tracking-wider border-b">
+        <tr>
+            <th>ID</th>
+            <th>lon</th>
+            <th>lat</th>
+            <th>bearing</th>
+            <th>odometer</th>
+            <th>speed</th>
+            <th>vehicle stop status</th>
+            <th>measured at</th>
+            <th>congestion level</th>
+            <th>trip identifier id</th>
+            <th>Created At</th>
+            <th>Last Updated At</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @latest_positions.each do |position| %>
+        <tr class = "border-b">
+            <td><%= position.id %></td>
+            <td><%= position.lon %></td>
+            <td><%= position.lat %></td>
+            <td><%= position.bearing %></td>
+            <td><%= position.odometer %></td>
+            <td><%= position.speed %></td>
+            <td><%= position.vehicle_stop_status %></td>
+            <td><%= position.measured_at %></td>
+            <td><%= position.congestion_level %></td>
+            <td><%= position.trip_identifier_id %></td>
+            <td><%= @trip.created_at %></td>
+            <td><%= @trip.updated_at %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
