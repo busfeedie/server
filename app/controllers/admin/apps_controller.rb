@@ -48,6 +48,7 @@ module Admin
           entry.extract(Rails.root.join('admin', 'uploads', folder_name, entry.name))
         end
       end
+      # should move the rake task logic to a service object
       Rake::Task['import_from_csv'].invoke(folder_path, @app.id, '',
                                            params[:agency_id])
       redirect_to action: 'show', id: @app.id
