@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-# typed: strict
+# typed: false
 
 module Admin
   # This controller is used to list the available trips
@@ -27,6 +27,30 @@ module Admin
 
       flash.alert = 'App not found'
       redirect_to action: 'index'
+    end
+
+    sig { void }
+    def upload_gtfs
+      @app = T.let(App.find_by(id: params[:id]), T.nilable(App))
+      uploaded_file = T.let(params[:gtfs], T.nilable(ActionDispatch::Http::UploadedFile))
+      return unless @app && uploaded_file
+
+      filename = Rails.root.join('admin', 'uploads', uploaded_file.original_filename)
+      File.open(filename, 'wb') do |file|
+        file.write(uploaded_file.read)
+      end
+      folder_name = uploaded_file.original_filename.split('.').first
+      folder_path = Rails.root.join('admin', 'uploads', folder_name)
+      Dir.mkdir(folder_path) unless File.exist?(folder_path)
+      ::Zip::File.open(filename) do |zip_file|
+        zip_file.each do |entry|
+          Rails.logger.info "Extracting #{entry.name}"
+          entry.extract(Rails.root.join('admin', 'uploads', folder_name, entry.name))
+        end
+      end
+      Rake::Task['import_from_csv'].invoke(folder_path, @app.id, '',
+                                           params[:agency_id])
+      redirect_to action: 'show', id: @app.id
     end
   end
 end

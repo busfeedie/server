@@ -58,6 +58,8 @@ gem 'opentelemetry-exporter-otlp'
 gem 'opentelemetry-instrumentation-all'
 gem 'opentelemetry-sdk'
 
+gem 'rubyzip', require: 'zip'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -102,4 +104,4 @@ group :test do
   gem 'selenium-webdriver'
 end
 
-gem "tailwindcss-rails", "~> 2.4"
+gem 'tailwindcss-rails', '~> 2.4'

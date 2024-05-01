@@ -9,6 +9,30 @@ module GeneratedUrlHelpersModule
   include ::ActionDispatch::Routing::PolymorphicRoutes
 
   sig { params(args: T.untyped).returns(String) }
+  def admin_app_trip_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def admin_app_trips_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def admin_app_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def admin_app_users_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def admin_apps_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def admin_user_password_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def admin_user_registration_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def admin_user_session_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def api_positions_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -21,10 +45,22 @@ module GeneratedUrlHelpersModule
   def api_vehicles_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def cancel_admin_user_registration_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def cancel_user_registration_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def destroy_admin_user_session_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def destroy_user_session_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def edit_admin_user_password_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def edit_admin_user_registration_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def edit_user_password_url(*args); end
@@ -37,6 +73,15 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def latest_position_api_trip_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_admin_user_password_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_admin_user_registration_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_admin_user_session_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_source_url(*args); end
@@ -145,6 +190,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def update_rails_disk_service_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def upload_gtfs_admin_app_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def user_password_url(*args); end

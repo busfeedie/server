@@ -4,7 +4,7 @@
 RSpec.describe 'rake import_from_csv' do
   let(:app) { create(:app) }
   let(:app_id) { app.id }
-  let(:csv_folder_name) { 'gtfs' }
+  let(:csv_folder_name) { 'lib/data/gtfs/' }
   let(:subject) { Rake::Task['import_from_csv'] }
 
   before(:each) do
@@ -234,7 +234,7 @@ RSpec.describe 'rake import_from_csv' do
 
   describe 'importing a single agency from a multi-agency file' do
     let(:gtfs_agency_id) { '7778048' }
-    let(:csv_folder_name) { 'multi_agency' }
+    let(:csv_folder_name) { 'lib/data/multi_agency/' }
     let(:import_from_file) { subject.invoke(csv_folder_name, app_id, '', gtfs_agency_id) }
     let(:run_file) do
       subject.reenable

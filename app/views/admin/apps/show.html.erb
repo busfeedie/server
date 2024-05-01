@@ -18,4 +18,14 @@
 
 Users: <%= link_to("Users", admin_app_users_path(app_id: @app.id)) %><br/>
 Trips: <%= link_to("Trips", admin_app_trips_path(app_id: @app.id)) %>
+<div class="border-solid border-2 border-sky-500">
+    Upload GTFS:
+    <%= form_with url: upload_gtfs_admin_app_path(@app.id) do |form| %>
+        <%= form.label :gtfs, "zip:" %>
+        <%= form.file_field :gtfs, accept: ".zip" %>
+        <%= form.label :agency_id, "Agency id:" %>
+        <%= form.text_field :agency_id %>
+        <%= form.submit %>
+    <% end %>
+</div>
 

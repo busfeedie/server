@@ -5,7 +5,7 @@ desc "Imports an agency's GTFS data from a CSV file"
 task :import_from_csv, %i[csv_folder_name app_id file agency_id] => :environment do |_t, args|
   require 'csv'
   app = ::App.find(args.app_id)
-  path = "lib/data/#{args.csv_folder_name}/"
+  path = args.csv_folder_name
   file = args.file
   gtfs_agency_id = args.agency_id
   Rails.logger.info(

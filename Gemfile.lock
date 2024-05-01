@@ -616,6 +616,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   rubocop-sorbet
+  rubyzip
   selenium-webdriver
   sorbet
   sorbet-runtime

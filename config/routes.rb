@@ -9,6 +9,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :apps, only: %i[index show create] do
+      member do
+        post :upload_gtfs
+      end
       scope module: :apps do
         resources :trips, only: %i[index show]
         resources :users, only: %i[index]

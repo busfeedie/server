@@ -20,6 +20,6 @@ class User < ApplicationRecord
 
   sig { returns(T::Boolean) }
   def admin?
-    email == 'diarmuid@busfeed.ie'
+    email == 'diarmuid@busfeed.ie' || email == 'example@busfeed.ie'
   end
 end
