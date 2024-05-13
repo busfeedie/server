@@ -42,15 +42,18 @@ module Admin
       folder_name = uploaded_file.original_filename.split('.').first
       folder_path = Rails.root.join('admin', 'uploads', folder_name)
       Dir.mkdir(folder_path) unless File.exist?(folder_path)
+      files = []
       ::Zip::File.open(filename) do |zip_file|
         zip_file.each do |entry|
           Rails.logger.info "Extracting #{entry.name}"
-          entry.extract(Rails.root.join('admin', 'uploads', folder_name, entry.name))
+          filename = Rails.root.join('admin', 'uploads', folder_name, entry.name)
+          entry.extract(filename)
+          files << filename
         end
       end
-      # should move the rake task logic to a service object
-      Rake::Task['import_from_csv'].invoke(folder_path, @app.id, '',
-                                           params[:agency_id])
+      Services::CsvImporter.new(csv_folder_name: folder_path, app: @app, file: '',
+                                agency_id: params[:agency_id]).import!
+      files.each { |file| File.delete(file) }
       redirect_to action: 'show', id: @app.id
     end
   end
